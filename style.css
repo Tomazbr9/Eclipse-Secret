@@ -1,0 +1,244 @@
+/*
+Theme Name: Eclipse Secret
+Description: Tema filho do Storefront para a boutique Eclipse Secret.
+Author: Bruno Tomaz & Maicon Silva
+Template: storefront
+Version: 1.0.0
+Text Domain: eclipse-secret
+*/
+
+/* Identidade visual */
+:root {
+    --eclipse-ink: #242022;
+    --eclipse-wine: #4b1026;
+    --eclipse-plum: #2c1728;
+    --eclipse-sand: #e7d7c7;
+    --eclipse-paper: #f8f5f0;
+    --eclipse-gold: #ae9163;
+    --eclipse-muted: #62575b;
+
+    --eclipse-font-body: Arial, Helvetica, sans-serif;
+    --eclipse-font-heading: Georgia, "Times New Roman", serif;
+}
+
+/* Base */
+body {
+    background-color: var(--eclipse-paper);
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-body);
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--eclipse-font-heading);
+}
+
+/* Marca no cabeçalho atual do Storefront */
+.site-branding .site-title a {
+    color: var(--eclipse-wine);
+    font-family: var(--eclipse-font-heading);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+}
+
+.site-branding .site-description {
+    color: var(--eclipse-muted);
+}
+
+/* Foco visível para navegação pelo teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--eclipse-wine);
+    outline-offset: 4px;
+}
+
+/* Cabeçalho */
+#masthead.site-header {
+    padding: 0;
+    margin-bottom: 0;
+    background: var(--eclipse-paper);
+    border-bottom: 1px solid rgba(36, 32, 34, 0.1);
+}
+
+.eclipse-header {
+    width: min(100% - 48px, 1400px);
+    margin-inline: auto;
+}
+
+.eclipse-header__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+    min-height: 100px;
+}
+
+#masthead .eclipse-header a {
+    color: var(--eclipse-ink);
+    text-decoration: none;
+}
+
+#masthead .eclipse-header a:hover {
+    color: var(--eclipse-wine);
+}
+
+/* Marca */
+.eclipse-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+}
+
+.eclipse-brand__name {
+    font-family: var(--eclipse-font-heading);
+    font-size: clamp(18px, 2.5vw, 28px);
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+}
+
+.eclipse-brand__description {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+/* Conta e carrinho */
+.eclipse-header__actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.eclipse-header__actions a,
+.eclipse-search > summary {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Busca */
+.eclipse-search {
+    position: relative;
+}
+
+.eclipse-search > summary {
+    width: fit-content;
+    padding-block: 12px;
+    cursor: pointer;
+}
+
+.eclipse-search > summary:focus-visible {
+    outline: 2px solid var(--eclipse-wine);
+    outline-offset: 4px;
+}
+
+.eclipse-search__panel {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    z-index: 100;
+    width: min(360px, calc(100vw - 48px));
+    padding: 24px;
+    background: var(--eclipse-paper);
+    border: 1px solid var(--eclipse-sand);
+    box-shadow: 0 12px 30px rgba(36, 32, 34, 0.1);
+}
+
+.eclipse-search__panel form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+}
+
+.eclipse-search__panel input[type="search"] {
+    width: 100%;
+    min-width: 0;
+    background: white;
+}
+
+.eclipse-search__panel button {
+    background: var(--eclipse-wine);
+    color: white;
+}
+
+/* Menu principal */
+.eclipse-navigation {
+    border-top: 1px solid rgba(36, 32, 34, 0.06);
+}
+
+.eclipse-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+}
+
+.eclipse-menu > li {
+    margin: 0;
+}
+
+.eclipse-menu > li > a {
+    display: block;
+    padding: 8px 0;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+#masthead .eclipse-menu > .current-menu-item > a {
+    color: var(--eclipse-wine);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+/* Celular */
+@media (max-width: 767px) {
+    .eclipse-header {
+        width: calc(100% - 32px);
+    }
+
+    .eclipse-header__top {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12px;
+        padding-block: 20px;
+    }
+
+    .eclipse-brand {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .eclipse-header__search {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .eclipse-header__actions {
+        grid-column: 2;
+        grid-row: 2;
+        gap: 16px;
+    }
+
+    .eclipse-menu {
+        gap: 4px 18px;
+    }
+
+    .eclipse-menu > li > a {
+        font-size: 10px;
+    }
+}
