@@ -17,7 +17,10 @@ $has_woocommerce = class_exists( 'WooCommerce' );
         <div class="eclipse-header__search">
             <?php if ( $has_woocommerce ) : ?>
                 <details class="eclipse-search">
-                    <summary>Buscar</summary>
+                    <summary>
+                        <?php eclipse_secret_icon( 'search' ); ?>
+                        <span>Buscar</span>
+                    </summary>
 
                     <div class="eclipse-search__panel">
                         <?php get_product_search_form(); ?>
@@ -32,7 +35,6 @@ $has_woocommerce = class_exists( 'WooCommerce' );
             aria-label="Eclipse Secret — página inicial"
         >
             <span class="eclipse-brand__name">ECLIPSE SECRET</span>
-            <span class="eclipse-brand__description">Boutique íntima</span>
         </a>
 
         <?php if ( $has_woocommerce ) : ?>
@@ -41,11 +43,13 @@ $has_woocommerce = class_exists( 'WooCommerce' );
                 aria-label="Conta e compras"
             >
                 <a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>">
-                    Conta
+                    <?php eclipse_secret_icon( 'user' ); ?>
+                    <span>Conta</span>
                 </a>
 
                 <a href="<?php echo esc_url( wc_get_cart_url() ); ?>">
-                    Carrinho
+                    <?php eclipse_secret_icon( 'shopping-bag' ); ?>
+                    <span>Carrinho</span>
                 </a>
             </nav>
         <?php endif; ?>
