@@ -109,3 +109,58 @@ function eclipse_secret_setup_front_page() {
     );
 }
 add_action( 'wp', 'eclipse_secret_setup_front_page' );
+
+/**
+ * Configura o rodapé e registra seus menus.
+ */
+function eclipse_secret_setup_footer() {
+    register_nav_menus(
+        array(
+            'eclipse_footer_shop' => 'Rodapé — Comprar',
+            'eclipse_footer_help' => 'Rodapé — Atendimento',
+            'eclipse_footer_info' => 'Rodapé — Informações',
+        )
+    );
+
+    remove_action(
+        'storefront_footer',
+        'storefront_footer_widgets',
+        10
+    );
+
+    remove_action(
+        'storefront_footer',
+        'storefront_credit',
+        20
+    );
+
+    add_action(
+        'storefront_footer',
+        'eclipse_secret_render_footer',
+        10
+    );
+}
+add_action( 'after_setup_theme', 'eclipse_secret_setup_footer', 20 );
+
+/**
+ * Exibe o conteúdo personalizado do rodapé.
+ */
+function eclipse_secret_render_footer() {
+    get_template_part( 'template-parts/footer/site-footer' );
+}
+
+/**
+ * Remove a barra lateral apenas da página individual do produto.
+ */
+function eclipse_secret_setup_product_page() {
+    if ( ! function_exists( 'is_product' ) || ! is_product() ) {
+        return;
+    }
+
+    remove_action(
+        'storefront_sidebar',
+        'storefront_get_sidebar',
+        10
+    );
+}
+add_action( 'wp', 'eclipse_secret_setup_product_page' );
