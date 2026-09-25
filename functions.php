@@ -164,3 +164,56 @@ function eclipse_secret_setup_product_page() {
     );
 }
 add_action( 'wp', 'eclipse_secret_setup_product_page' );
+
+/**
+ * Coloca a descrição completa na área de compra.
+ */
+function eclipse_secret_move_product_description() {
+    if ( ! function_exists( 'is_product' ) || ! is_product() ) {
+        return;
+    }
+
+    // Evita exibir a descrição curta junto da completa.
+    remove_action(
+        'woocommerce_single_product_summary',
+        'woocommerce_template_single_excerpt',
+        20
+    );
+
+    add_action(
+        'woocommerce_single_product_summary',
+        'eclipse_secret_product_description',
+        20
+    );
+
+    add_filter(
+        'woocommerce_product_tabs',
+        'eclipse_secret_remove_description_tab',
+        98
+    );
+}
+add_action( 'wp', 'eclipse_secret_move_product_description' );
+
+/**
+ * Exibe o conteúdo cadastrado na descrição do produto.
+ */
+function eclipse_secret_product_description() {
+    $content = get_post_field( 'post_content', get_the_ID() );
+
+    if ( '' === trim( $content ) ) {
+        return;
+    }
+
+    echo '<div class="eclipse-product-description">';
+    echo apply_filters( 'the_content', $content );
+    echo '</div>';
+}
+
+/**
+ * Remove a aba para não repetir a descrição.
+ */
+function eclipse_secret_remove_description_tab( $tabs ) {
+    unset( $tabs['description'] );
+
+    return $tabs;
+}

@@ -1070,3 +1070,173 @@ body.single-product #primary div.product > .upsells {
         clear: both;
     }
 }
+
+/* Foto principal: ocupa a galeria sem cortar a imagem */
+body.single-product #primary
+.woocommerce-product-gallery__image > a {
+    display: block;
+}
+
+/* Limita a altura da foto sem cortar o produto */
+body.single-product #primary
+.woocommerce-product-gallery__image > a > img {
+    display: block;
+    width: 100%;
+    height: min(65vh, 600px);
+    object-fit: contain;
+    object-position: center;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* Descrição e avaliações */
+body.single-product #primary .woocommerce-tabs {
+    clear: both;
+    padding-top: 36px;
+    border-top: 1px solid var(--eclipse-sand);
+}
+
+body.single-product #primary .woocommerce-tabs ul.tabs {
+    float: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    width: 100%;
+    margin: 0 0 28px;
+    padding: 0;
+    border-top: 0;
+    border-bottom: 1px solid var(--eclipse-sand);
+}
+
+body.single-product #primary .woocommerce-tabs ul.tabs li {
+    margin: 0;
+    border: 0;
+}
+
+body.single-product #primary .woocommerce-tabs ul.tabs li::after {
+    display: none;
+}
+
+body.single-product #primary .woocommerce-tabs ul.tabs li a {
+    display: block;
+    padding: 14px 0;
+    color: var(--eclipse-muted);
+    font-size: 14px;
+}
+
+body.single-product #primary .woocommerce-tabs ul.tabs li.active a {
+    color: var(--eclipse-wine);
+    box-shadow: inset 0 -2px var(--eclipse-wine);
+}
+
+body.single-product #primary .woocommerce-tabs .panel {
+    float: none;
+    width: 100%;
+    margin: 0 0 40px;
+    color: var(--eclipse-muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+body.single-product #primary .woocommerce-tabs .panel h2 {
+    color: var(--eclipse-ink);
+    font-size: 26px;
+    font-weight: 400;
+}
+
+/* Produtos relacionados */
+body.single-product #primary .related.products {
+    clear: both;
+    margin-top: 24px;
+}
+
+body.single-product #primary .related.products > h2 {
+    margin-bottom: 28px;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+body.single-product #primary .related ul.products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+body.single-product #primary .related ul.products::before,
+body.single-product #primary .related ul.products::after {
+    display: none;
+}
+
+body.single-product #primary .related ul.products > li.product {
+    float: none;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    text-align: left;
+}
+
+body.single-product #primary .related ul.products li.product img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: white;
+    margin-bottom: 16px;
+}
+
+body.single-product #primary .related .woocommerce-loop-product__title {
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+body.single-product #primary .related ul.products li.product .price {
+    color: var(--eclipse-wine);
+    font-size: 16px;
+}
+
+body.single-product #primary .related ul.products li.product .button {
+    padding: 12px 18px;
+    border: 1px solid var(--eclipse-wine);
+    background: transparent;
+    color: var(--eclipse-wine);
+    font-size: 12px;
+}
+
+body.single-product #primary .related ul.products li.product .button:hover {
+    background: var(--eclipse-wine);
+    color: var(--eclipse-paper);
+}
+
+@media (max-width: 767px) {
+    body.single-product #primary .related ul.products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 479px) {
+    body.single-product #primary .related ul.products {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Descrição ao lado da imagem */
+body.single-product #primary .eclipse-product-description {
+    margin: 0 0 28px;
+    color: var(--eclipse-muted);
+    font-size: 15px;
+    line-height: 1.8;
+    overflow-wrap: break-word;
+}
+
+.eclipse-product-description p {
+    margin-bottom: 16px;
+}
+
+.eclipse-product-description ul,
+.eclipse-product-description ol {
+    margin: 0 0 16px 20px;
+}
+
+.eclipse-product-description > :last-child {
+    margin-bottom: 0;
+}
