@@ -1240,3 +1240,7 @@ body.single-product #primary .eclipse-product-description {
 .eclipse-product-description > :last-child {
     margin-bottom: 0;
 }
+
+.eclipse-footer {
+    background-color: red !important;
+}
