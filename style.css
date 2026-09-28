@@ -1355,3 +1355,241 @@ body.single-product #primary .eclipse-product-description {
 .eclipse-product-description > :last-child {
     margin-bottom: 0;
 }
+
+/* Carrinho — estrutura da página */
+body.woocommerce-cart #content > .col-full {
+    width: min(100% - 48px, 1200px);
+    max-width: none;
+    margin-inline: auto;
+    padding: 0;
+}
+
+body.woocommerce-cart #primary {
+    float: none;
+    width: 100%;
+    margin: 0;
+}
+
+body.woocommerce-cart #primary .entry-header {
+    padding: 0;
+    margin-bottom: 36px;
+    text-align: left;
+}
+
+body.woocommerce-cart #primary .entry-title {
+    margin: 0;
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-heading);
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 20px;
+}
+
+body.woocommerce-cart #primary .entry-content {
+    margin-bottom: 64px;
+}
+
+/* Carrinho em blocos */
+body.woocommerce-cart #primary .wp-block-woocommerce-cart {
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-body);
+    font-size: 14px;
+}
+
+/* Área dos produtos */
+body.woocommerce-cart #primary .wc-block-cart-items {
+    border: 0;
+    background: transparent;
+}
+
+body.woocommerce-cart #primary .wc-block-cart-items th {
+    padding-block: 16px;
+    background: transparent;
+    color: var(--eclipse-muted);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+body.woocommerce-cart #primary .wc-block-cart-items td {
+    padding-block: 24px;
+    border-color: var(--eclipse-sand);
+    background: transparent;
+}
+
+/* Fotos sem recorte */
+body.woocommerce-cart #primary .wc-block-cart-item__image img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border: 1px solid var(--eclipse-sand);
+    border-radius: 4px;
+    background: #fff;
+}
+
+/* Nome e informações */
+body.woocommerce-cart #primary .wc-block-components-product-name {
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-heading);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.35;
+    text-decoration: none;
+}
+
+body.woocommerce-cart #primary .wc-block-components-product-name:hover {
+    color: var(--eclipse-wine);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+body.woocommerce-cart #primary .wc-block-components-product-metadata {
+    color: var(--eclipse-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+body.woocommerce-cart #primary .wc-block-components-product-price {
+    color: var(--eclipse-wine);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Controle de quantidade */
+body.woocommerce-cart #primary .wc-block-components-quantity-selector {
+    min-height: 44px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+body.woocommerce-cart #primary .wc-block-components-quantity-selector::after {
+    border-color: var(--eclipse-sand);
+    border-radius: 4px;
+}
+
+body.woocommerce-cart #primary .wc-block-components-quantity-selector__input {
+    background: transparent;
+    color: var(--eclipse-ink);
+    font-size: 14px;
+    box-shadow: none;
+}
+
+body.woocommerce-cart #primary .wc-block-components-quantity-selector__button {
+    background: transparent;
+    color: var(--eclipse-wine);
+    box-shadow: none;
+}
+
+body.woocommerce-cart #primary .wc-block-components-quantity-selector__button:disabled {
+    opacity: 0.4;
+}
+
+/* Remover produto */
+body.woocommerce-cart #primary .wc-block-cart-item__remove-link {
+    color: var(--eclipse-muted);
+}
+
+body.woocommerce-cart #primary .wc-block-cart-item__remove-link:hover {
+    color: var(--eclipse-wine);
+}
+
+/* Resumo da compra */
+body.woocommerce-cart #primary .wc-block-cart__sidebar {
+    align-self: flex-start;
+    padding: 24px;
+    box-sizing: border-box;
+    border: 1px solid var(--eclipse-sand);
+    border-radius: 6px;
+    background: #fff;
+}
+
+body.woocommerce-cart #primary .wc-block-cart__totals-title {
+    padding: 0 0 20px;
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-heading);
+    font-size: 25px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+body.woocommerce-cart #primary .wc-block-components-totals-wrapper {
+    border-color: var(--eclipse-sand);
+}
+
+body.woocommerce-cart #primary .wc-block-components-totals-item {
+    line-height: 1.6;
+}
+
+body.woocommerce-cart #primary .wc-block-components-totals-footer-item {
+    color: var(--eclipse-wine);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Botões do bloco, incluindo aplicar cupom */
+body.woocommerce-cart #primary .wc-block-components-button {
+    min-height: 48px;
+    padding: 14px 20px;
+    border: 1px solid var(--eclipse-wine);
+    border-radius: 4px;
+    background: var(--eclipse-wine);
+    color: #fff;
+    font-family: var(--eclipse-font-body);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    text-align: center;
+    text-decoration: none;
+}
+
+body.woocommerce-cart #primary .wc-block-components-button:hover {
+    border-color: var(--eclipse-plum);
+    background: var(--eclipse-plum);
+    color: #fff;
+}
+
+body.woocommerce-cart #primary .wc-block-components-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mantém legível o botão fixo exibido no celular */
+body.woocommerce-cart #primary .wc-block-cart__submit-container {
+    background: #fff;
+}
+
+/* Oculta a barra lateral do Storefront apenas no carrinho */
+body.woocommerce-cart #secondary {
+    display: none;
+}
+
+/* Foco para navegação por teclado */
+body.woocommerce-cart #primary .wp-block-woocommerce-cart a:focus-visible,
+body.woocommerce-cart #primary .wp-block-woocommerce-cart button:focus-visible {
+    outline: 2px solid var(--eclipse-wine);
+    outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+    body.woocommerce-cart #primary .wc-block-cart__sidebar {
+        padding: 20px;
+    }
+
+    body.woocommerce-cart #primary .wc-block-components-product-name {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 767px) {
+    body.woocommerce-cart #content > .col-full {
+        width: calc(100% - 32px);
+    }
+
+    body.woocommerce-cart #primary .entry-header {
+        margin-bottom: 24px;
+    }
+}

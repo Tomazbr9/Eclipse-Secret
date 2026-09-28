@@ -217,3 +217,35 @@ function eclipse_secret_remove_description_tab( $tabs ) {
 
     return $tabs;
 }
+
+/**
+ * Remove a barra lateral da página do carrinho.
+ */
+function eclipse_secret_setup_cart_page() {
+    if ( ! function_exists( 'is_cart' ) || ! is_cart() ) {
+        return;
+    }
+
+    remove_action(
+        'storefront_sidebar',
+        'storefront_get_sidebar',
+        10
+    );
+}
+add_action( 'wp', 'eclipse_secret_setup_cart_page' );
+
+/**
+ * Remove o breadcrumb da página do carrinho.
+ */
+function eclipse_secret_remove_cart_breadcrumb() {
+    if ( ! function_exists( 'is_cart' ) || ! is_cart() ) {
+        return;
+    }
+
+    remove_action(
+        'storefront_before_content',
+        'woocommerce_breadcrumb',
+        10
+    );
+}
+add_action( 'wp', 'eclipse_secret_remove_cart_breadcrumb', 20 );
