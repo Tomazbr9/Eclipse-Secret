@@ -1147,19 +1147,27 @@ body.single-product #primary .woocommerce-tabs .panel h2 {
 /* Produtos relacionados */
 body.single-product #primary .related.products {
     clear: both;
-    margin-top: 24px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--eclipse-sand);
 }
 
 body.single-product #primary .related.products > h2 {
-    margin-bottom: 28px;
-    font-size: 30px;
+    margin: 0 0 28px;
+    color: var(--eclipse-ink);
+    font-size: clamp(26px, 3vw, 34px);
     font-weight: 400;
 }
 
+/* Mantém os cards proporcionais mesmo com poucos produtos */
 body.single-product #primary .related ul.products {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 340px));
+    align-items: stretch;
     gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 body.single-product #primary .related ul.products::before,
@@ -1167,55 +1175,162 @@ body.single-product #primary .related ul.products::after {
     display: none;
 }
 
+/* Card */
 body.single-product #primary .related ul.products > li.product {
+    position: relative;
     float: none;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-width: 0;
     margin: 0;
+    padding: 16px;
+    box-sizing: border-box;
+    border: 1px solid var(--eclipse-sand);
+    border-radius: 6px;
+    background: #fff;
     text-align: left;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+body.single-product #primary .related ul.products > li.product:hover {
+    border-color: var(--eclipse-gold);
+    box-shadow: 0 8px 24px rgba(36, 32, 34, 0.07);
+}
+
+body.single-product #primary .related .woocommerce-LoopProduct-link {
+    display: block;
+    color: var(--eclipse-ink);
+    text-decoration: none;
+}
+
+/* Foto inteira, sem recorte e sem ampliar no hover */
 body.single-product #primary .related ul.products li.product img {
+    display: block;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
+    height: 260px;
+    aspect-ratio: auto;
+    margin: 0 0 20px;
+    padding: 0;
     object-fit: contain;
-    background: white;
-    margin-bottom: 16px;
+    object-position: center;
+    border-radius: 0;
+    background: #fff;
 }
 
+/* Nome */
 body.single-product #primary .related .woocommerce-loop-product__title {
+    min-height: 2.7em;
+    margin: 0 0 12px;
+    padding: 0;
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-heading);
     font-size: 20px;
+    font-weight: 400;
     line-height: 1.35;
+    overflow-wrap: anywhere;
 }
 
+/* Preço */
 body.single-product #primary .related ul.products li.product .price {
+    display: block;
+    margin: 0 0 20px;
     color: var(--eclipse-wine);
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
-body.single-product #primary .related ul.products li.product .button {
-    padding: 12px 18px;
-    border: 1px solid var(--eclipse-wine);
+body.single-product #primary .related .price del {
+    color: var(--eclipse-muted);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+body.single-product #primary .related .price ins {
     background: transparent;
-    color: var(--eclipse-wine);
-    font-size: 12px;
+    text-decoration: none;
+}
+
+/* Selo de promoção */
+body.single-product #primary .related ul.products li.product .onsale {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: auto;
+    margin: 0;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--eclipse-wine);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+/* Botão alinhado na base */
+body.single-product #primary .related ul.products li.product .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 46px;
+    margin: auto 0 0;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid var(--eclipse-wine);
+    border-radius: 3px;
+    background: var(--eclipse-wine);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: normal;
 }
 
 body.single-product #primary .related ul.products li.product .button:hover {
-    background: var(--eclipse-wine);
-    color: var(--eclipse-paper);
+    border-color: var(--eclipse-plum);
+    background: var(--eclipse-plum);
+    color: #fff;
 }
 
-@media (max-width: 767px) {
+body.single-product #primary .related ul.products li.product .added_to_cart {
+    margin-top: 12px;
+    padding: 8px;
+    background: transparent;
+    color: var(--eclipse-wine);
+    font-size: 12px;
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
     body.single-product #primary .related ul.products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 340px));
+        gap: 20px;
     }
 }
 
-@media (max-width: 479px) {
+/* Celular */
+@media (max-width: 599px) {
     body.single-product #primary .related ul.products {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 340px);
+        justify-content: center;
+    }
+
+    body.single-product #primary .related ul.products li.product img {
+        height: 240px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.single-product #primary .related ul.products > li.product {
+        transition: none;
     }
 }
 
