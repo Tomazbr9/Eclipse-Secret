@@ -16,6 +16,7 @@ Text Domain: eclipse-secret
     --eclipse-paper: #f8f5f0;
     --eclipse-gold: #ae9163;
     --eclipse-muted: #62575b;
+    
 
     --eclipse-font-body: Arial, Helvetica, sans-serif;
     --eclipse-font-heading: Georgia, "Times New Roman", serif;
@@ -792,8 +793,8 @@ body.home #primary.eclipse-home {
 
 .eclipse-footer__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
-    gap: 48px;
+    grid-template-columns: 1fr auto;
+    gap: 80px;
 }
 
 /* Marca */
@@ -818,20 +819,110 @@ body.home #primary.eclipse-home {
 .eclipse-footer__description {
     max-width: 300px;
     margin: 20px 0 0;
-    color: #c9c0bc;
+    color: #c5c9bc;
     font-size: 13px;
     line-height: 1.8;
 }
 
+.eclipse-footer__social {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.eclipse-footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--eclipse-gold);
+    border-radius: 50%;
+    color: var(--eclipse-gold);
+    transition: background 0.2s ease;
+}
+
+.eclipse-footer__social-link:hover {
+    background: var(--eclipse-gold);
+}
+
+.eclipse-footer__social-link svg {
+    width: 16px;
+    height: 16px;
+    color: var(--eclipse-paper);
+}
+
+.eclipse-footer__social-link .eclipse-icon svg {
+    fill: currentColor;
+    stroke: none;
+}
+
+.eclipse-footer__info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.eclipse-footer__info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--eclipse-gold);
+    border-radius: 50%;
+    color: var(--eclipse-gold);
+}
+
+.eclipse-footer__info-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+#colophon .eclipse-footer__info-value {
+    display: block;
+    color: #c9c0bc;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+#colophon a.eclipse-footer__info-value:hover {
+    color: var(--eclipse-gold);
+    text-decoration: none;
+}
+
+.eclipse-footer__info-sub {
+    display: block;
+    color: #c9c0bc;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
 /* Colunas de navegação */
 #colophon .eclipse-footer__nav h2 {
+    position: relative;
     margin: 0 0 20px;
+    padding-bottom: 12px;
     color: var(--eclipse-paper);
     font-family: var(--eclipse-font-body);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+}
+
+#colophon .eclipse-footer__nav h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--eclipse-gold);
 }
 
 .eclipse-footer__menu {
@@ -856,8 +947,22 @@ body.home #primary.eclipse-home {
 
 #colophon .eclipse-footer__menu a:hover {
     color: var(--eclipse-paper);
-    text-decoration: underline;
-    text-underline-offset: 5px;
+    text-decoration: none;
+    
+}
+
+#colophon .eclipse-footer__menu li.current-menu-item > a {
+    color: var(--eclipse-paper);
+}
+
+#colophon .eclipse-footer__menu li.current-menu-item > a::before {
+    content: "— ";
+    color: var(--eclipse-gold);
+}
+
+#colophon .eclipse-footer__menu a:hover::before {
+    content: "— ";
+    color: var(--eclipse-gold);
 }
 
 #colophon .eclipse-footer a:focus-visible {
