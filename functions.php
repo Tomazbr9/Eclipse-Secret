@@ -58,6 +58,10 @@ function eclipse_secret_icon($name)
         'instagram',
         'facebook',
         'whatsapp',
+        'clock',
+        'mail',
+        'phone',
+
     );
 
     if (!in_array($name, $allowed_icons, true)) {
@@ -234,8 +238,9 @@ function eclipse_secret_remove_description_tab($tabs)
 /**
  * Remove a barra lateral da página do carrinho.
  */
-function eclipse_secret_setup_cart_page() {
-    if ( ! function_exists( 'is_cart' ) || ! is_cart() ) {
+function eclipse_secret_setup_cart_page()
+{
+    if (!function_exists('is_cart') || !is_cart()) {
         return;
     }
 
@@ -245,13 +250,14 @@ function eclipse_secret_setup_cart_page() {
         10
     );
 }
-add_action( 'wp', 'eclipse_secret_setup_cart_page' );
+add_action('wp', 'eclipse_secret_setup_cart_page');
 
 /**
  * Remove o breadcrumb da página do carrinho.
  */
-function eclipse_secret_remove_cart_breadcrumb() {
-    if ( ! function_exists( 'is_cart' ) || ! is_cart() ) {
+function eclipse_secret_remove_cart_breadcrumb()
+{
+    if (!function_exists('is_cart') || !is_cart()) {
         return;
     }
 
@@ -261,4 +267,4 @@ function eclipse_secret_remove_cart_breadcrumb() {
         10
     );
 }
-add_action( 'wp', 'eclipse_secret_remove_cart_breadcrumb', 20 );
+add_action('wp', 'eclipse_secret_remove_cart_breadcrumb', 20);

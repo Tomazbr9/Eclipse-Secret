@@ -7,11 +7,7 @@
 
 defined('ABSPATH') || exit;
 
-$footer_menus = array(
-    'eclipse_footer_shop' => 'Comprar',
-    'eclipse_footer_help' => 'Ajuda',
-    'eclipse_footer_info' => 'Sobre',
-);
+
 ?>
 
 <div class="eclipse-footer">
@@ -49,35 +45,38 @@ $footer_menus = array(
             </div>
         </div>
 
-        <?php foreach ($footer_menus as $location => $title): ?>
-            <?php
-            if (!has_nav_menu($location)) {
-                continue;
-            }
+        <nav class="eclipse-footer__nav" aria-labelledby="contato-title">
+            <h2 id="contato-title">Contato</h2>
 
-            $heading_id = $location . '-title';
-            ?>
+            <div class="eclipse-footer__info-item">
+                <span class="eclipse-footer__info-icon"><?php echo eclipse_secret_icon('phone'); ?></span>
+                <div>
+                    <a href="https://wa.me/5511987654321" target="_blank" rel="noopener"
+                        class="eclipse-footer__info-value">
+                        (11) 98765-4321
+                    </a>
+                    <span class="eclipse-footer__info-sub">Atendimento via WhatsApp</span>
+                </div>
+            </div>
 
-            <nav class="eclipse-footer__nav" aria-labelledby="<?php echo esc_attr($heading_id); ?>">
-                <h2 id="<?php echo esc_attr($heading_id); ?>">
-                    <?php echo esc_html($title); ?>
-                </h2>
+            <div class="eclipse-footer__info-item">
+                <span class="eclipse-footer__info-icon"><?php echo eclipse_secret_icon('mail'); ?></span>
+                <div>
+                    <a href="mailto:contato@eclipsesecret.com.br" class="eclipse-footer__info-value">
+                        contato@eclipsesecret.com.br
+                    </a>
+                    <span class="eclipse-footer__info-sub">Respondemos em até 24h</span>
+                </div>
+            </div>
 
-                <?php
-                wp_nav_menu(
-                    array(
-                        'theme_location' => $location,
-                        'container' => false,
-                        'menu_class' => 'eclipse-footer__menu',
-                        'menu_id' => $location . '-menu',
-                        'depth' => 1,
-                        'fallback_cb' => false,
-                    )
-                );
-                ?>
-            </nav>
-
-        <?php endforeach; ?>
+            <div class="eclipse-footer__info-item">
+                <span class="eclipse-footer__info-icon"><?php echo eclipse_secret_icon('clock'); ?></span>
+                <div>
+                    <span class="eclipse-footer__info-value">Seg a Sex: 9h às 18h</span>
+                    <span class="eclipse-footer__info-sub">Sáb: 9h às 14h</span>
+                </div>
+            </div>
+        </nav>
 
     </div>
 
