@@ -268,3 +268,200 @@ function eclipse_secret_remove_cart_breadcrumb()
     );
 }
 add_action('wp', 'eclipse_secret_remove_cart_breadcrumb', 20);
+
+
+
+
+
+/**
+ * Remove a barra lateral das páginas de categoria e loja. 04/10
+ */
+function eclipse_secret_setup_shop_pages()
+{
+    if (
+        !function_exists('is_shop') || !function_exists('is_product_category')
+    ) {
+        return;
+    }
+
+    if (!is_shop() && !is_product_category()) {
+        return;
+    }
+
+    remove_action(
+        'storefront_sidebar',
+        'storefront_get_sidebar',
+        10
+    );
+}
+add_action('wp', 'eclipse_secret_setup_shop_pages');
+
+
+/**
+ * Remove a ordenação duplicada do final da página
+ * nas páginas de loja e categoria.
+ */
+function eclipse_secret_remove_bottom_ordering()
+{
+    if (
+        !function_exists('is_shop')|| !function_exists('is_product_category')) {
+        return;
+    }
+
+    if (!is_shop() && !is_product_category()) {
+        return;
+    }
+
+    remove_action(
+        'woocommerce_after_shop_loop',
+        'woocommerce_catalog_ordering',
+        10
+    );
+}
+add_action('wp', 'eclipse_secret_remove_bottom_ordering', 20);
+
+
+/**
+ * Remove o contador de produtos do final da página.
+ */
+function eclipse_secret_remove_bottom_result_count()
+{
+    if (
+        !function_exists('is_shop')|| !function_exists('is_product_category')) {
+        return;
+    }
+
+    if (!is_shop() && !is_product_category()) {
+        return;
+    }
+
+    remove_action(
+        'woocommerce_after_shop_loop',
+        'woocommerce_result_count',
+        20
+    );
+}
+add_action('wp', 'eclipse_secret_remove_bottom_result_count', 20);
+
+
+/**
+ * ECLIPSE SECRET — Banner da categoria
+ * Troca título/descrição/breadcrumb padrão por um banner com a imagem da categoria.
+ */
+function eclipse_secret_setup_category_banner()
+{
+    if (!function_exists('is_product_category') || !is_product_category()) {
+        return;
+    }
+
+    // Breadcrumb padrão sai de cima; ele será renderizado dentro do banner.
+    remove_action('storefront_before_content', 'woocommerce_breadcrumb', 10);
+    add_action('storefront_before_content', 'eclipse_secret_render_category_banner', 10);
+
+    // Remove título e descrição padrão da área de conteúdo.
+    add_filter('woocommerce_show_page_title', '__return_false');
+    remove_action('woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10);
+    remove_action('woocommerce_archive_description', 'woocommerce_product_archive_description', 10);
+}
+add_action('wp', 'eclipse_secret_setup_category_banner', 20);
+
+function eclipse_secret_render_category_banner()
+{
+    $term = get_queried_object();
+
+    if (!$term instanceof WP_Term) {
+        return;
+    }
+
+    $thumb_id    = (int) get_term_meta($term->term_id, 'thumbnail_id', true);
+    $description = term_description($term->term_id, 'product_cat');
+    ?>
+    <section class="eclipse-category-banner">
+        <?php
+        if ($thumb_id) {
+            echo wp_get_attachment_image($thumb_id, 'full', false, array(
+                'class'   => 'eclipse-category-banner__image',
+                'alt'     => '',
+                'loading' => 'eager',
+            ));
+        }
+        ?>
+        <div class="eclipse-category-banner__inner">
+            <?php
+            woocommerce_breadcrumb(array(
+                'delimiter'   => ' / ',
+                'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
+                'wrap_after'  => '</nav>',
+                'home'        => 'Início',
+            ));
+            ?>
+            <h1 class="eclipse-category-banner__title"><?php echo esc_html($term->name); ?></h1>
+
+            <?php if ($description) : ?>
+                <div class="eclipse-category-banner__description">
+                    <?php echo wp_kses_post($description); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
+/**
+ * Selo de desconto em porcentagem (-10%) em vez de "Promoção!".
+ */
+function eclipse_secret_sale_badge($html, $post, $product)
+{
+    if ($product->is_type('variable')) {
+        $regular = (float) $product->get_variation_regular_price('min');
+        $sale    = (float) $product->get_variation_sale_price('min');
+    } else {
+        $regular = (float) $product->get_regular_price();
+        $sale    = (float) $product->get_sale_price();
+    }
+
+    if ($regular <= 0 || $sale <= 0 || $sale >= $regular) {
+        return $html;
+    }
+
+    $percent = round((1 - ($sale / $regular)) * 100);
+
+    return '<span class="onsale">-' . (int) $percent . '%</span>';
+}
+add_filter('woocommerce_sale_flash', 'eclipse_secret_sale_badge', 10, 3);
+
+/**
+ * 12 produtos por página (4 colunas x 3 linhas), como no design.
+ */
+add_filter('loop_shop_per_page', function () {
+    return 12;
+}, 20);
+
+/**
+ * Nome do produto na listagem: converte CAIXA ALTA em "Primeira Letra Maiúscula".
+ * Nomes que já estão em caixa mista não são alterados.
+ */
+function eclipse_secret_setup_loop_title()
+{
+    if (!function_exists('is_shop') || (!is_shop() && !is_product_taxonomy())) {
+        return;
+    }
+
+    remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
+    add_action('woocommerce_shop_loop_item_title', 'eclipse_secret_loop_product_title', 10);
+}
+add_action('wp', 'eclipse_secret_setup_loop_title', 20);
+
+function eclipse_secret_loop_product_title()
+{
+    $title = get_the_title();
+
+    if (mb_strtoupper($title, 'UTF-8') === $title) {
+        $title = mb_convert_case(mb_strtolower($title, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+    }
+
+    echo '<h2 class="woocommerce-loop-product__title">' . esc_html($title) . '</h2>';
+}
+
+
+

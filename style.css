@@ -1698,3 +1698,888 @@ body.woocommerce-cart #primary .wp-block-woocommerce-cart button:focus-visible {
         margin-bottom: 24px;
     }
 }
+
+
+
+/* =====================================================
+   ECLIPSE SECRET 04/10
+   PÁGINAS DE CATEGORIA / LOJA
+===================================================== */
+
+/* Fundo da página */
+
+body.woocommerce.archive,
+body.woocommerce.tax-product_cat {
+    background: var(--eclipse-paper);
+}
+
+
+/* Container principal */
+
+body.woocommerce.archive #content > .col-full,
+body.woocommerce.tax-product_cat #content > .col-full {
+    width: min(100% - 48px, 1200px);
+    max-width: none;
+    margin-inline: auto;
+    padding: 0;
+}
+
+
+/* Área principal */
+
+body.woocommerce.archive #primary,
+body.woocommerce.tax-product_cat #primary {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+}
+
+
+/* Sidebar */
+
+body.woocommerce.archive #secondary,
+body.woocommerce.tax-product_cat #secondary {
+    display: none;
+}
+
+
+/* =====================================================
+   CABEÇALHO DA CATEGORIA
+===================================================== */
+
+body.woocommerce.archive .woocommerce-products-header,
+body.woocommerce.tax-product_cat .woocommerce-products-header {
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+
+/* Título */
+
+body.woocommerce.archive
+.woocommerce-products-header__title,
+body.woocommerce.tax-product_cat
+.woocommerce-products-header__title {
+    position: relative;
+
+    display: inline-block;
+
+    margin: 0;
+    padding-bottom: 18px;
+
+    color: var(--eclipse-ink);
+
+    font-family: var(--eclipse-font-heading);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+/* Linha dourada */
+
+body.woocommerce.archive
+.woocommerce-products-header__title::after,
+body.woocommerce.tax-product_cat
+.woocommerce-products-header__title::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 46px;
+    height: 1px;
+
+    transform: translateX(-50%);
+
+    background: var(--eclipse-gold);
+}
+
+
+/* =====================================================
+   BREADCRUMB
+===================================================== */
+
+body.woocommerce.archive
+.woocommerce-breadcrumb,
+body.woocommerce.tax-product_cat
+.woocommerce-breadcrumb {
+    margin: 28px 0 42px;
+
+    color: var(--eclipse-muted);
+
+    font-family: var(--eclipse-font-body);
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+body.woocommerce.archive
+.woocommerce-breadcrumb a,
+body.woocommerce.tax-product_cat
+.woocommerce-breadcrumb a {
+    color: var(--eclipse-muted);
+    text-decoration: none;
+}
+
+
+body.woocommerce.archive
+.woocommerce-breadcrumb a:hover,
+body.woocommerce.tax-product_cat
+.woocommerce-breadcrumb a:hover {
+    color: var(--eclipse-wine);
+}
+
+
+/* =====================================================
+   GRID DE PRODUTOS
+===================================================== */
+
+body.woocommerce.archive ul.products,
+body.woocommerce.tax-product_cat ul.products {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    column-gap: 24px;
+    row-gap: 55px;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    list-style: none;
+}
+
+
+/* Remove o comportamento padrão do Storefront */
+
+body.woocommerce.archive ul.products::before,
+body.woocommerce.archive ul.products::after,
+body.woocommerce.tax-product_cat ul.products::before,
+body.woocommerce.tax-product_cat ul.products::after {
+    display: none;
+}
+
+
+/* Cada produto */
+
+body.woocommerce.archive ul.products li.product,
+body.woocommerce.tax-product_cat ul.products li.product {
+    float: none !important;
+
+    width: auto !important;
+
+    margin: 0 !important;
+
+    padding: 0;
+
+    text-align: center;
+
+    background: transparent;
+}
+
+
+/* =====================================================
+   IMAGENS DOS PRODUTOS
+===================================================== */
+
+body.woocommerce.archive
+ul.products li.product a img,
+
+body.woocommerce.tax-product_cat
+ul.products li.product a img {
+    display: block;
+
+    width: 100% !important;
+    height: auto !important;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    margin: 0 0 18px !important;
+
+    background: #ffffff;
+
+    border: 0;
+
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+}
+
+body.woocommerce.archive
+ul.products li.product:hover a img,
+
+body.woocommerce.tax-product_cat
+ul.products li.product:hover a img {
+    transform: scale(1.02);
+
+    opacity: 0.94;
+}
+
+/* =====================================================
+   NOME DOS PRODUTOS
+===================================================== */
+
+body.woocommerce.archive
+ul.products li.product
+.woocommerce-loop-product__title,
+
+body.woocommerce.tax-product_cat
+ul.products li.product
+.woocommerce-loop-product__title {
+    margin: 0 5px 8px !important;
+
+    min-height: 38px;
+
+    color: var(--eclipse-ink);
+
+    font-family: var(--eclipse-font-heading);
+
+    font-size: 14px !important;
+    font-weight: 400;
+
+    line-height: 1.35;
+
+    transition: color 0.25s ease;
+}
+
+
+body.woocommerce.archive
+ul.products li.product:hover
+.woocommerce-loop-product__title,
+
+body.woocommerce.tax-product_cat
+ul.products li.product:hover
+.woocommerce-loop-product__title {
+    color: var(--eclipse-wine);
+}
+
+/* =====================================================
+   PREÇOS
+===================================================== */
+
+body.woocommerce.archive
+ul.products li.product .price,
+
+body.woocommerce.tax-product_cat
+ul.products li.product .price {
+    display: block;
+
+    margin: 0 0 16px !important;
+
+    color: var(--eclipse-wine) !important;
+
+    font-family: var(--eclipse-font-body);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+body.woocommerce.archive
+ul.products li.product .price del,
+
+body.woocommerce.tax-product_cat
+ul.products li.product .price del {
+    color: var(--eclipse-muted);
+
+    opacity: 0.65;
+}
+
+
+body.woocommerce.archive
+ul.products li.product .price ins,
+
+body.woocommerce.tax-product_cat
+ul.products li.product .price ins {
+    color: var(--eclipse-wine);
+
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   BOTÃO ADICIONAR AO CARRINHO
+===================================================== */
+
+body.woocommerce.archive
+ul.products li.product .button,
+
+body.woocommerce.tax-product_cat
+ul.products li.product .button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    margin: 0 !important;
+    padding: 13px 18px;
+
+    border: 1px solid var(--eclipse-wine);
+    border-radius: 0;
+
+    background: transparent;
+    color: var(--eclipse-wine);
+
+    font-family: var(--eclipse-font-body);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.8px;
+    text-align: center;
+    text-transform: uppercase;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+
+    text-transform: uppercase;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+body.woocommerce.archive
+ul.products li.product .button:hover,
+
+body.woocommerce.tax-product_cat
+ul.products li.product .button:hover {
+    background: var(--eclipse-wine);
+
+    border-color: var(--eclipse-wine);
+
+    color: #ffffff;
+}
+
+/* =====================================================
+   SELO DE PROMOÇÃO
+===================================================== */
+
+body.woocommerce.archive
+ul.products li.product span.onsale,
+
+body.woocommerce.tax-product_cat
+ul.products li.product span.onsale {
+    top: 12px !important;
+    left: 12px !important;
+
+    min-width: auto;
+    min-height: auto;
+
+    margin: 0 !important;
+
+    padding: 7px 10px;
+
+    border-radius: 0;
+
+    background: var(--eclipse-wine);
+
+    color: #ffffff;
+
+    font-family: var(--eclipse-font-body);
+
+    font-size: 9px;
+
+    font-weight: 400;
+
+    letter-spacing: 0.4px;
+
+    text-transform: uppercase;
+}
+
+/* =====================================================
+   ORDENAÇÃO
+===================================================== */
+
+body.woocommerce.archive
+.woocommerce-ordering,
+
+body.woocommerce.tax-product_cat
+.woocommerce-ordering {
+    margin-bottom: 35px;
+}
+
+
+body.woocommerce.archive
+.woocommerce-ordering select,
+
+body.woocommerce.tax-product_cat
+.woocommerce-ordering select {
+    min-width: 170px;
+
+    padding: 9px 30px 9px 12px;
+
+    border: 1px solid #d8cec5;
+
+    border-radius: 0;
+
+    background: var(--eclipse-paper);
+
+    color: var(--eclipse-ink);
+
+    font-family: var(--eclipse-font-body);
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+body.woocommerce.archive
+.woocommerce-ordering select:focus,
+
+body.woocommerce.tax-product_cat
+.woocommerce-ordering select:focus {
+    border-color: var(--eclipse-gold);
+}
+
+/* Quantidade de produtos */
+
+body.woocommerce.archive
+.woocommerce-result-count,
+
+body.woocommerce.tax-product_cat
+.woocommerce-result-count {
+    margin: 10px 0 35px;
+
+    color: var(--eclipse-muted);
+
+    font-family: var(--eclipse-font-body);
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    body.woocommerce.archive ul.products,
+    body.woocommerce.tax-product_cat ul.products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        column-gap: 18px;
+        row-gap: 45px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    body.woocommerce.archive #content > .col-full,
+    body.woocommerce.tax-product_cat #content > .col-full {
+        width: calc(100% - 32px);
+    }
+
+
+    body.woocommerce.archive ul.products,
+    body.woocommerce.tax-product_cat ul.products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        column-gap: 12px;
+        row-gap: 38px;
+    }
+
+
+    body.woocommerce.archive
+    ul.products li.product
+    .woocommerce-loop-product__title,
+
+    body.woocommerce.tax-product_cat
+    ul.products li.product
+    .woocommerce-loop-product__title {
+        font-size: 12px !important;
+    }
+
+
+    body.woocommerce.archive
+    ul.products li.product .button,
+
+    body.woocommerce.tax-product_cat
+    ul.products li.product .button {
+        padding: 9px 10px;
+
+        font-size: 8px;
+    }
+
+}
+
+
+/* =====================================================
+   ECLIPSE SECRET
+   ORDENAÇÃO + CONTADOR — LARGURA TOTAL
+===================================================== */
+
+body.woocommerce.archive .storefront-sorting,
+body.woocommerce.tax-product_cat .storefront-sorting {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    margin: 0 0 38px !important;
+    padding: 0 0 18px !important;
+    border-bottom: 1px solid rgba(174, 145, 99, 0.35);
+}
+
+/* CONTADOR — ESQUERDA */
+body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
+    float: none !important;
+    width: auto;
+    margin: 0 !important;
+    padding: 0;
+    color: var(--eclipse-muted);
+    font-family: var(--eclipse-font-body);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 38px;
+    text-align: left;
+}
+
+/* ORDENAÇÃO — DIREITA */
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering {
+    float: none !important;
+    width: auto;
+    margin: 0 !important;
+    padding: 0;
+}
+
+/* SELECT */
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select {
+    min-width: 185px;
+    height: 38px;
+    padding: 0 34px 0 13px;
+    border: 1px solid #d8cec5;
+    border-radius: 0;
+    background: var(--eclipse-paper);
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-body);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    outline: none;
+    cursor: pointer;
+    transition:
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select:hover,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select:hover {
+    border-color: var(--eclipse-gold);
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select:focus,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select:focus {
+    border-color: var(--eclipse-gold);
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   TABLET / CELULAR
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body.woocommerce.archive .storefront-sorting,
+    body.woocommerce.tax-product_cat .storefront-sorting {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14 px;
+    }
+
+    body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
+    body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
+        width: 100%;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
+    body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering {
+        width: 100%;
+    }
+
+    body.woocommerce.archive .storefront-sorting .woocommerce-ordering select,
+    body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select {
+        width: 100%;
+    }
+}
+
+/* Ajuste final: contador à esquerda, ordenação à direita */
+body.woocommerce.archive .storefront-sorting,
+body.woocommerce.tax-product_cat .storefront-sorting {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
+    order: -1 !important;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering {
+    order: 1 !important;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-notices-wrapper,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-notices-wrapper {
+    display: none !important;
+}
+
+/* =====================================================
+   ECLIPSE SECRET — CATEGORIA, PARTE 2 (banner + ajustes)
+===================================================== */
+
+/* ---------- Banner ---------- */
+.eclipse-category-banner {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 260px;
+    overflow: hidden;
+    background: var(--eclipse-plum);
+    color: var(--eclipse-paper);
+}
+
+.eclipse-category-banner__image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0;
+}
+
+.eclipse-category-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        90deg,
+        rgba(20, 10, 17, 0.88) 0%,
+        rgba(20, 10, 17, 0.6) 55%,
+        rgba(20, 10, 17, 0.15) 100%
+    );
+}
+
+.eclipse-category-banner__inner {
+    width: min(100% - 48px, 1200px);
+    margin-inline: auto;
+    padding-block: 48px;
+}
+
+/* Breadcrumb dentro do banner */
+body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb {
+    margin: 0 0 18px;
+    padding: 0;
+    color: rgba(248, 245, 240, 0.8);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb a {
+    color: rgba(248, 245, 240, 0.8);
+}
+
+body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb a:hover {
+    color: #fff;
+}
+
+/* Remove o ícone de casinha do Storefront */
+.eclipse-category-banner .woocommerce-breadcrumb a:first-of-type::before {
+    content: none;
+    display: none;
+}
+
+.eclipse-category-banner__title {
+    margin: 0;
+    color: var(--eclipse-paper);
+    font-family: var(--eclipse-font-heading);
+    font-size: clamp(34px, 4.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.eclipse-category-banner__description {
+    max-width: 480px;
+    margin-top: 18px;
+    color: rgba(248, 245, 240, 0.92);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.eclipse-category-banner__description p {
+    margin: 0;
+}
+
+/* Espaço entre banner e listagem; esconde o header vazio do Woo */
+body.tax-product_cat .site-content {
+    padding-top: 40px;
+}
+
+body.tax-product_cat .woocommerce-products-header {
+    display: none;
+}
+
+/* ---------- Cards alinhados à esquerda ---------- */
+body.woocommerce.archive ul.products li.product,
+body.woocommerce.tax-product_cat ul.products li.product {
+    position: relative;
+    text-align: left;
+}
+
+body.woocommerce.archive ul.products li.product a:not(.button),
+body.woocommerce.tax-product_cat ul.products li.product a:not(.button) {
+    color: var(--eclipse-ink);
+    text-decoration: none;
+}
+
+body.woocommerce.archive ul.products li.product .woocommerce-loop-product__title,
+body.woocommerce.tax-product_cat ul.products li.product .woocommerce-loop-product__title {
+    margin: 0 0 8px !important;
+    padding: 0;
+    min-height: 2.7em;
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-body);
+    font-size: 13px !important;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+body.woocommerce.archive ul.products li.product .price,
+body.woocommerce.tax-product_cat ul.products li.product .price {
+    margin: 0 0 14px !important;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body.woocommerce.archive ul.products li.product .price del,
+body.woocommerce.tax-product_cat ul.products li.product .price del {
+    margin-right: 6px;
+    font-weight: 400;
+    font-size: 11px;
+}
+
+body.woocommerce.archive ul.products li.product .price ins,
+body.woocommerce.tax-product_cat ul.products li.product .price ins {
+    background: transparent;
+    font-weight: 600;
+}
+
+/* Selo -10% sobre a imagem */
+body.woocommerce.archive ul.products li.product span.onsale,
+body.woocommerce.tax-product_cat ul.products li.product span.onsale {
+    position: absolute;
+    z-index: 2;
+    right: auto;
+    padding: 6px 9px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* ---------- Contador / ordenação ---------- */
+body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
+    font-size: 13px;
+    letter-spacing: 0;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select,
+body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select {
+    font-size: 12px;
+}
+
+/* ---------- Paginação ---------- */
+.woocommerce-pagination {
+    margin: 64px 0 0;
+    text-align: center;
+}
+
+.woocommerce-pagination ul.page-numbers {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.woocommerce-pagination ul.page-numbers li {
+    margin: 0;
+    border: 0;
+}
+
+.woocommerce-pagination .page-numbers a,
+.woocommerce-pagination .page-numbers span.page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border: 0;
+    background: transparent;
+    color: var(--eclipse-ink);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.woocommerce-pagination .page-numbers a:hover {
+    color: var(--eclipse-wine);
+    background: transparent;
+}
+
+.woocommerce-pagination .page-numbers span.current {
+    background: var(--eclipse-wine);
+    color: #fff;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 600px) {
+    .eclipse-category-banner {
+        min-height: 220px;
+    }
+
+    .eclipse-category-banner__inner {
+        width: calc(100% - 32px);
+        padding-block: 36px;
+    }
+
+    .eclipse-category-banner::before {
+        background: rgba(20, 10, 17, 0.7);
+    }
+
+    body.tax-product_cat .site-content {
+        padding-top: 28px;
+    }
+}
+
+
