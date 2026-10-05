@@ -268,3 +268,25 @@ function eclipse_secret_remove_cart_breadcrumb()
     );
 }
 add_action('wp', 'eclipse_secret_remove_cart_breadcrumb', 20);
+
+/**
+ * Ajusta a estrutura da página Minha conta.
+ */
+function eclipse_secret_setup_account_page() {
+    if ( ! function_exists( 'is_account_page' ) || ! is_account_page() ) {
+        return;
+    }
+
+    remove_action(
+        'storefront_sidebar',
+        'storefront_get_sidebar',
+        10
+    );
+
+    remove_action(
+        'storefront_before_content',
+        'woocommerce_breadcrumb',
+        10
+    );
+}
+add_action( 'wp', 'eclipse_secret_setup_account_page', 20 );
