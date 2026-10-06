@@ -7,7 +7,25 @@ Version: 1.0.0
 Text Domain: eclipse-secret
 */
 
-/* Identidade visual */
+/* =====================================================
+   ECLIPSE SECRET: CSS DO TEMA 
+
+   Ordem do arquivo:
+   1. Identidade e base
+   2. Cabeçalho e menu
+   3. Página inicial
+   4. Rodapé
+   5. Página de produto
+   6. Carrinho
+   7. Categorias / loja
+   8. Barra de avisos
+   9. Aviso +18
+   10. Rodapé: pagamento e ajuda
+===================================================== */
+
+/* =====================================================
+   1. IDENTIDADE E BASE
+===================================================== */
 :root {
     --eclipse-ink: #242022;
     --eclipse-wine: #4b1026;
@@ -16,13 +34,11 @@ Text Domain: eclipse-secret
     --eclipse-paper: #f8f5f0;
     --eclipse-gold: #ae9163;
     --eclipse-muted: #62575b;
-    
 
     --eclipse-font-body: Arial, Helvetica, sans-serif;
     --eclipse-font-heading: Georgia, "Times New Roman", serif;
 }
 
-/* Base */
 body {
     background-color: var(--eclipse-paper);
     color: var(--eclipse-ink);
@@ -30,16 +46,10 @@ body {
     line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--eclipse-font-heading);
 }
 
-/* Marca no cabeçalho atual do Storefront */
 .site-branding .site-title a {
     color: var(--eclipse-wine);
     font-family: var(--eclipse-font-heading);
@@ -61,7 +71,9 @@ textarea:focus-visible {
     outline-offset: 4px;
 }
 
-/* Cabeçalho */
+/* =====================================================
+   2. CABEÇALHO E MENU
+===================================================== */
 #masthead.site-header {
     padding: 0;
     margin-bottom: 0;
@@ -102,12 +114,12 @@ textarea:focus-visible {
 
 .eclipse-brand__name {
     font-family: var(--eclipse-font-heading);
-    font-size: clamp(18px, 2.5vw, 3px);
+    font-size: clamp(18px, 2.5vw, 28px);
     line-height: 1.2;
     letter-spacing: 0.12em;
 }
 
-/* Conta e carrinho */
+/* Conta, carrinho e busca (texto + ícone) */
 .eclipse-header__actions {
     display: flex;
     justify-content: flex-end;
@@ -117,6 +129,10 @@ textarea:focus-visible {
 
 .eclipse-header__actions a,
 .eclipse-search > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -130,12 +146,12 @@ textarea:focus-visible {
 .eclipse-search > summary {
     width: fit-content;
     padding-block: 12px;
+    list-style: none;
     cursor: pointer;
 }
 
-.eclipse-search > summary:focus-visible {
-    outline: 2px solid var(--eclipse-wine);
-    outline-offset: 4px;
+.eclipse-search > summary::-webkit-details-marker {
+    display: none;
 }
 
 .eclipse-search__panel {
@@ -188,17 +204,49 @@ textarea:focus-visible {
 }
 
 .eclipse-menu > li > a {
+    position: relative;
     display: block;
     padding: 8px 0;
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    transition: color 0.1s ease;
 }
 
-#masthead .eclipse-menu > .current-menu-item > a {
+/* Linha abaixo do nome (escondida por padrão) */
+.eclipse-menu > li > a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--eclipse-wine);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+/* Hover e página atual: cor vinho */
+#masthead .eclipse-menu > li > a:hover,
+#masthead .eclipse-menu > .current-menu-item > a,
+#masthead .eclipse-menu > li > a:active {
     color: var(--eclipse-wine);
-    text-decoration: underline;
-    text-underline-offset: 6px;
+}
+
+/* Linha visível: página atual, clique e foco por teclado */
+#masthead .eclipse-menu > .current-menu-item > a::after,
+#masthead .eclipse-menu > li > a:active::after,
+#masthead .eclipse-menu > li > a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+/* Sem retângulo ao clicar */
+#masthead .eclipse-menu > li > a:focus,
+#masthead .eclipse-menu > li > a:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
 }
 
 /* Ícones do tema */
@@ -221,25 +269,6 @@ textarea:focus-visible {
     stroke-width: 1.7;
 }
 
-/* Alinhamento dos ícones com os textos */
-.eclipse-header__actions a,
-.eclipse-search > summary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-}
-
-/* Remove o marcador padrão do details */
-.eclipse-search > summary {
-    list-style: none;
-}
-
-.eclipse-search > summary::-webkit-details-marker {
-    display: none;
-}
-
-/* Celular */
 @media (max-width: 767px) {
     .eclipse-header {
         width: calc(100% - 32px);
@@ -272,11 +301,13 @@ textarea:focus-visible {
     }
 
     .eclipse-menu > li > a {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
-/* Estrutura da página inicial */
+/* =====================================================
+   3. PÁGINA INICIAL
+===================================================== */
 body.home #content > .col-full {
     width: 100%;
     max-width: none;
@@ -290,7 +321,7 @@ body.home #primary.eclipse-home {
     margin: 0;
 }
 
-/* Banner principal */
+/* ---------- Banner principal ---------- */
 .eclipse-hero {
     position: relative;
     isolation: isolate;
@@ -390,6 +421,13 @@ body.home #primary.eclipse-home {
     outline-offset: 5px;
 }
 
+@media (min-width: 1024px) {
+    .eclipse-hero__inner {
+        width: 84%;
+        max-width: 1200px;
+    }
+}
+
 @media (max-width: 767px) {
     .eclipse-hero {
         min-height: 520px;
@@ -409,20 +447,7 @@ body.home #primary.eclipse-home {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .eclipse-hero__button {
-        transition: none;
-    }
-}
-
-@media (min-width: 1024px) {
-    .eclipse-hero__inner {
-        width: 84%;
-        max-width: 1200px;
-    }
-}
-
-/* Categorias da página inicial */
+/* ---------- Categorias ---------- */
 .eclipse-categories {
     padding-block: 88px;
     background: var(--eclipse-paper);
@@ -465,7 +490,6 @@ body.home #primary.eclipse-home {
     gap: 20px;
 }
 
-/* Cartão */
 .eclipse-category {
     position: relative;
     isolation: isolate;
@@ -534,14 +558,12 @@ body.home #primary.eclipse-home {
     outline-offset: 4px;
 }
 
-/* Tablet */
 @media (max-width: 1023px) {
     .eclipse-categories__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* Celular */
 @media (max-width: 599px) {
     .eclipse-categories {
         padding-block: 56px;
@@ -562,17 +584,10 @@ body.home #primary.eclipse-home {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .eclipse-category__image {
-        transition: none;
-    }
-}
-
-/* Vitrine da página inicial */
+/* ---------- Vitrine ---------- */
 .eclipse-featured {
     padding-block: 72px 88px;
     background: var(--eclipse-paper);
-    
 }
 
 .eclipse-featured__inner {
@@ -622,13 +637,11 @@ body.home #primary.eclipse-home {
     list-style: none;
 }
 
-/* Evita que os elementos de clearfix ocupem células do grid */
 .eclipse-featured ul.products::before,
 .eclipse-featured ul.products::after {
     display: none;
 }
 
-/* Faz cada produto preencher sua célula no grid */
 #primary .eclipse-featured ul.products > li.product {
     float: none;
     clear: none;
@@ -689,13 +702,11 @@ body.home #primary.eclipse-home {
     text-decoration: none;
 }
 
-/* Avaliações reais, quando houver */
 .eclipse-featured ul.products li.product .star-rating {
     margin: 0 0 12px;
     color: var(--eclipse-wine);
 }
 
-/* Selo de promoção */
 .eclipse-featured ul.products li.product .onsale {
     padding: 5px 10px;
     border: 1px solid var(--eclipse-wine);
@@ -704,7 +715,6 @@ body.home #primary.eclipse-home {
     font-size: 11px;
 }
 
-/* Botões nativos de compra */
 .eclipse-featured ul.products li.product .button {
     display: flex;
     align-items: center;
@@ -742,14 +752,12 @@ body.home #primary.eclipse-home {
     text-underline-offset: 4px;
 }
 
-/* Tablet */
 @media (max-width: 1023px) {
     .eclipse-featured ul.products {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* Celular */
 @media (max-width: 599px) {
     .eclipse-featured {
         padding-block: 48px 56px;
@@ -771,13 +779,19 @@ body.home #primary.eclipse-home {
     }
 }
 
+/* Menos movimento para quem prefere */
 @media (prefers-reduced-motion: reduce) {
-    .eclipse-featured ul.products li.product .button {
+    .eclipse-hero__button,
+    .eclipse-category__image,
+    .eclipse-featured ul.products li.product .button,
+    body.single-product #primary .related ul.products > li.product {
         transition: none;
     }
 }
 
-/* Rodapé */
+/* =====================================================
+   4. RODAPÉ
+===================================================== */
 #colophon.site-footer {
     padding: 72px 0 32px;
     background: var(--eclipse-ink);
@@ -824,6 +838,7 @@ body.home #primary.eclipse-home {
     line-height: 1.8;
 }
 
+/* Redes sociais */
 .eclipse-footer__social {
     display: flex;
     gap: 12px;
@@ -857,6 +872,7 @@ body.home #primary.eclipse-home {
     stroke: none;
 }
 
+/* Contato */
 .eclipse-footer__info-item {
     display: flex;
     align-items: flex-start;
@@ -884,7 +900,7 @@ body.home #primary.eclipse-home {
 #colophon .eclipse-footer__info-value {
     display: block;
     color: #c9c0bc;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 500;
     line-height: 1.5;
     text-decoration: none;
@@ -898,7 +914,7 @@ body.home #primary.eclipse-home {
 .eclipse-footer__info-sub {
     display: block;
     color: #c9c0bc;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.5;
 }
 
@@ -948,18 +964,13 @@ body.home #primary.eclipse-home {
 #colophon .eclipse-footer__menu a:hover {
     color: var(--eclipse-paper);
     text-decoration: none;
-    
 }
 
 #colophon .eclipse-footer__menu li.current-menu-item > a {
     color: var(--eclipse-paper);
 }
 
-#colophon .eclipse-footer__menu li.current-menu-item > a::before {
-    content: "— ";
-    color: var(--eclipse-gold);
-}
-
+#colophon .eclipse-footer__menu li.current-menu-item > a::before,
 #colophon .eclipse-footer__menu a:hover::before {
     content: "— ";
     color: var(--eclipse-gold);
@@ -988,7 +999,6 @@ body.home #primary.eclipse-home {
     line-height: 1.7;
 }
 
-/* Tablet */
 @media (max-width: 1023px) {
     .eclipse-footer__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -996,7 +1006,6 @@ body.home #primary.eclipse-home {
     }
 }
 
-/* Celular */
 @media (max-width: 599px) {
     #colophon.site-footer {
         padding-top: 48px;
@@ -1021,7 +1030,9 @@ body.home #primary.eclipse-home {
     }
 }
 
-/* Página individual do produto */
+/* =====================================================
+   5. PÁGINA INDIVIDUAL DO PRODUTO
+===================================================== */
 body.single-product #content > .col-full {
     width: min(100% - 48px, 1200px);
     max-width: none;
@@ -1048,9 +1059,22 @@ body.single-product #primary div.product > .summary {
     margin: 0 0 40px;
 }
 
-/* Preserva as proporções das fotos e o funcionamento da galeria */
+/* Foto principal: sem cortar o produto, com altura limitada */
+body.single-product #primary .woocommerce-product-gallery__image > a {
+    display: block;
+}
+
 body.single-product #primary .woocommerce-product-gallery__image img {
     border-radius: 0;
+}
+
+body.single-product #primary .woocommerce-product-gallery__image > a > img {
+    display: block;
+    width: 100%;
+    height: min(65vh, 600px);
+    object-fit: contain;
+    object-position: center;
+    margin: 0;
 }
 
 /* Título */
@@ -1065,7 +1089,7 @@ body.single-product #primary .summary .product_title {
     overflow-wrap: break-word;
 }
 
-/* Preço, incluindo produtos com variações */
+/* Preço */
 body.single-product #primary .summary .price {
     margin: 0 0 24px;
     color: var(--eclipse-wine);
@@ -1084,12 +1108,33 @@ body.single-product #primary .summary .price ins {
     text-decoration: none;
 }
 
-/* Descrição curta */
+/* Descrições */
 body.single-product #primary .woocommerce-product-details__short-description {
     margin-bottom: 24px;
     color: var(--eclipse-muted);
     font-size: 15px;
     line-height: 1.8;
+}
+
+body.single-product #primary .eclipse-product-description {
+    margin: 0 0 28px;
+    color: var(--eclipse-muted);
+    font-size: 15px;
+    line-height: 1.8;
+    overflow-wrap: break-word;
+}
+
+.eclipse-product-description p {
+    margin-bottom: 16px;
+}
+
+.eclipse-product-description ul,
+.eclipse-product-description ol {
+    margin: 0 0 16px 20px;
+}
+
+.eclipse-product-description > :last-child {
+    margin-bottom: 0;
 }
 
 /* Área de compra */
@@ -1148,53 +1193,13 @@ body.single-product #primary .summary .product_meta a {
     color: var(--eclipse-wine);
 }
 
-/* Mantém o conteúdo abaixo das duas colunas */
-body.single-product #primary div.product > .woocommerce-tabs,
+/* Conteúdo abaixo das duas colunas */
 body.single-product #primary div.product > .related,
 body.single-product #primary div.product > .upsells {
     clear: both;
 }
 
-/* Celular e telas menores */
-@media (max-width: 767px) {
-    body.single-product #content > .col-full {
-        width: calc(100% - 40px);
-    }
-
-    body.single-product #primary div.product > .woocommerce-product-gallery,
-    body.single-product #primary div.product > .summary {
-        float: none;
-        width: 100%;
-        margin: 0 0 32px;
-    }
-
-    body.single-product #primary .summary .single_add_to_cart_button {
-        display: block;
-        width: 100%;
-        margin-top: 16px;
-        clear: both;
-    }
-}
-
-/* Foto principal: ocupa a galeria sem cortar a imagem */
-body.single-product #primary
-.woocommerce-product-gallery__image > a {
-    display: block;
-}
-
-/* Limita a altura da foto sem cortar o produto */
-body.single-product #primary
-.woocommerce-product-gallery__image > a > img {
-    display: block;
-    width: 100%;
-    height: min(65vh, 600px);
-    object-fit: contain;
-    object-position: center;
-    margin: 0;
-    border-radius: 0;
-}
-
-/* Descrição e avaliações */
+/* Abas: descrição e avaliações */
 body.single-product #primary .woocommerce-tabs {
     clear: both;
     padding-top: 36px;
@@ -1249,7 +1254,7 @@ body.single-product #primary .woocommerce-tabs .panel h2 {
     font-weight: 400;
 }
 
-/* Produtos relacionados */
+/* ---------- Produtos relacionados ---------- */
 body.single-product #primary .related.products {
     clear: both;
     margin-top: 40px;
@@ -1264,7 +1269,6 @@ body.single-product #primary .related.products > h2 {
     font-weight: 400;
 }
 
-/* Mantém os cards proporcionais mesmo com poucos produtos */
 body.single-product #primary .related ul.products {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 340px));
@@ -1280,7 +1284,6 @@ body.single-product #primary .related ul.products::after {
     display: none;
 }
 
-/* Card */
 body.single-product #primary .related ul.products > li.product {
     position: relative;
     float: none;
@@ -1309,7 +1312,6 @@ body.single-product #primary .related .woocommerce-LoopProduct-link {
     text-decoration: none;
 }
 
-/* Foto inteira, sem recorte e sem ampliar no hover */
 body.single-product #primary .related ul.products li.product img {
     display: block;
     width: 100%;
@@ -1323,7 +1325,6 @@ body.single-product #primary .related ul.products li.product img {
     background: #fff;
 }
 
-/* Nome */
 body.single-product #primary .related .woocommerce-loop-product__title {
     min-height: 2.7em;
     margin: 0 0 12px;
@@ -1336,7 +1337,6 @@ body.single-product #primary .related .woocommerce-loop-product__title {
     overflow-wrap: anywhere;
 }
 
-/* Preço */
 body.single-product #primary .related ul.products li.product .price {
     display: block;
     margin: 0 0 20px;
@@ -1356,7 +1356,6 @@ body.single-product #primary .related .price ins {
     text-decoration: none;
 }
 
-/* Selo de promoção */
 body.single-product #primary .related ul.products li.product .onsale {
     position: absolute;
     top: 12px;
@@ -1372,7 +1371,6 @@ body.single-product #primary .related ul.products li.product .onsale {
     font-weight: 500;
 }
 
-/* Botão alinhado na base */
 body.single-product #primary .related ul.products li.product .button {
     display: flex;
     align-items: center;
@@ -1413,7 +1411,6 @@ body.single-product #primary .related ul.products li.product .added_to_cart {
     text-underline-offset: 4px;
 }
 
-/* Tablet */
 @media (max-width: 1023px) {
     body.single-product #primary .related ul.products {
         grid-template-columns: repeat(2, minmax(0, 340px));
@@ -1421,7 +1418,26 @@ body.single-product #primary .related ul.products li.product .added_to_cart {
     }
 }
 
-/* Celular */
+@media (max-width: 767px) {
+    body.single-product #content > .col-full {
+        width: calc(100% - 40px);
+    }
+
+    body.single-product #primary div.product > .woocommerce-product-gallery,
+    body.single-product #primary div.product > .summary {
+        float: none;
+        width: 100%;
+        margin: 0 0 32px;
+    }
+
+    body.single-product #primary .summary .single_add_to_cart_button {
+        display: block;
+        width: 100%;
+        margin-top: 16px;
+        clear: both;
+    }
+}
+
 @media (max-width: 599px) {
     body.single-product #primary .related ul.products {
         grid-template-columns: minmax(0, 340px);
@@ -1433,35 +1449,9 @@ body.single-product #primary .related ul.products li.product .added_to_cart {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    body.single-product #primary .related ul.products > li.product {
-        transition: none;
-    }
-}
-
-/* Descrição ao lado da imagem */
-body.single-product #primary .eclipse-product-description {
-    margin: 0 0 28px;
-    color: var(--eclipse-muted);
-    font-size: 15px;
-    line-height: 1.8;
-    overflow-wrap: break-word;
-}
-
-.eclipse-product-description p {
-    margin-bottom: 16px;
-}
-
-.eclipse-product-description ul,
-.eclipse-product-description ol {
-    margin: 0 0 16px 20px;
-}
-
-.eclipse-product-description > :last-child {
-    margin-bottom: 0;
-}
-
-/* Carrinho — estrutura da página */
+/* =====================================================
+   6. CARRINHO
+===================================================== */
 body.woocommerce-cart #content > .col-full {
     width: min(100% - 48px, 1200px);
     max-width: none;
@@ -1475,6 +1465,10 @@ body.woocommerce-cart #primary {
     margin: 0;
 }
 
+body.woocommerce-cart #secondary {
+    display: none;
+}
+
 body.woocommerce-cart #primary .entry-header {
     padding: 0;
     margin-bottom: 36px;
@@ -1482,27 +1476,25 @@ body.woocommerce-cart #primary .entry-header {
 }
 
 body.woocommerce-cart #primary .entry-title {
-    margin: 0;
+    margin: 20px 0 0;
     color: var(--eclipse-ink);
     font-family: var(--eclipse-font-heading);
     font-size: clamp(30px, 4vw, 44px);
     font-weight: 400;
     line-height: 1.2;
-    margin-top: 20px;
 }
 
 body.woocommerce-cart #primary .entry-content {
     margin-bottom: 64px;
 }
 
-/* Carrinho em blocos */
 body.woocommerce-cart #primary .wp-block-woocommerce-cart {
     color: var(--eclipse-ink);
     font-family: var(--eclipse-font-body);
     font-size: 14px;
 }
 
-/* Área dos produtos */
+/* Lista de produtos */
 body.woocommerce-cart #primary .wc-block-cart-items {
     border: 0;
     background: transparent;
@@ -1524,7 +1516,6 @@ body.woocommerce-cart #primary .wc-block-cart-items td {
     background: transparent;
 }
 
-/* Fotos sem recorte */
 body.woocommerce-cart #primary .wc-block-cart-item__image img {
     display: block;
     width: 100%;
@@ -1535,7 +1526,6 @@ body.woocommerce-cart #primary .wc-block-cart-item__image img {
     background: #fff;
 }
 
-/* Nome e informações */
 body.woocommerce-cart #primary .wc-block-components-product-name {
     color: var(--eclipse-ink);
     font-family: var(--eclipse-font-heading);
@@ -1563,7 +1553,7 @@ body.woocommerce-cart #primary .wc-block-components-product-price {
     font-weight: 600;
 }
 
-/* Controle de quantidade */
+/* Quantidade */
 body.woocommerce-cart #primary .wc-block-components-quantity-selector {
     min-height: 44px;
     border-radius: 4px;
@@ -1634,7 +1624,7 @@ body.woocommerce-cart #primary .wc-block-components-totals-footer-item {
     font-weight: 600;
 }
 
-/* Botões do bloco, incluindo aplicar cupom */
+/* Botões, incluindo aplicar cupom */
 body.woocommerce-cart #primary .wc-block-components-button {
     min-height: 48px;
     padding: 14px 20px;
@@ -1662,31 +1652,16 @@ body.woocommerce-cart #primary .wc-block-components-button:disabled {
     cursor: not-allowed;
 }
 
-/* Mantém legível o botão fixo exibido no celular */
+/* Botão fixo exibido no celular */
 body.woocommerce-cart #primary .wc-block-cart__submit-container {
     background: #fff;
 }
 
-/* Oculta a barra lateral do Storefront apenas no carrinho */
-body.woocommerce-cart #secondary {
-    display: none;
-}
-
-/* Foco para navegação por teclado */
+/* Foco por teclado */
 body.woocommerce-cart #primary .wp-block-woocommerce-cart a:focus-visible,
 body.woocommerce-cart #primary .wp-block-woocommerce-cart button:focus-visible {
     outline: 2px solid var(--eclipse-wine);
     outline-offset: 3px;
-}
-
-@media (max-width: 767px) {
-    body.woocommerce-cart #primary .wc-block-cart__sidebar {
-        padding: 20px;
-    }
-
-    body.woocommerce-cart #primary .wc-block-components-product-name {
-        font-size: 18px;
-    }
 }
 
 @media (max-width: 767px) {
@@ -1697,668 +1672,105 @@ body.woocommerce-cart #primary .wp-block-woocommerce-cart button:focus-visible {
     body.woocommerce-cart #primary .entry-header {
         margin-bottom: 24px;
     }
+
+    body.woocommerce-cart #primary .wc-block-cart__sidebar {
+        padding: 20px;
+    }
+
+    body.woocommerce-cart #primary .wc-block-components-product-name {
+        font-size: 18px;
+    }
 }
 
-
-
 /* =====================================================
-   ECLIPSE SECRET 04/10
-   PÁGINAS DE CATEGORIA / LOJA
+   ECLIPSE SECRET: CATEGORIAS / LOJA (VERSÃO LIMPA)
 ===================================================== */
 
-/* Fundo da página */
-
-body.woocommerce.archive,
-body.woocommerce.tax-product_cat {
+/* ---------- Página ---------- */
+body.woocommerce.archive {
     background: var(--eclipse-paper);
 }
 
-
-/* Container principal */
-
-body.woocommerce.archive #content > .col-full,
-body.woocommerce.tax-product_cat #content > .col-full {
+body.woocommerce.archive #content > .col-full {
     width: min(100% - 48px, 1200px);
     max-width: none;
     margin-inline: auto;
     padding: 0;
 }
 
-
-/* Área principal */
-
-body.woocommerce.archive #primary,
-body.woocommerce.tax-product_cat #primary {
+body.woocommerce.archive #primary {
     float: none;
     width: 100%;
     margin-right: 0;
 }
 
-
-/* Sidebar */
-
-body.woocommerce.archive #secondary,
-body.woocommerce.tax-product_cat #secondary {
+body.woocommerce.archive #secondary {
     display: none;
 }
 
+body.tax-product_cat .site-content {
+    padding-top: 40px;
+}
 
-/* =====================================================
-   CABEÇALHO DA CATEGORIA
-===================================================== */
+/* O cabeçalho padrão do Woo fica escondido nas categorias (usamos o banner) */
+body.tax-product_cat .woocommerce-products-header {
+    display: none;
+}
 
-body.woocommerce.archive .woocommerce-products-header,
-body.woocommerce.tax-product_cat .woocommerce-products-header {
+/* ---------- Cabeçalho da loja (páginas sem banner) ---------- */
+body.woocommerce.archive .woocommerce-products-header {
     margin-bottom: 48px;
     text-align: center;
 }
 
-
-/* Título */
-
-body.woocommerce.archive
-.woocommerce-products-header__title,
-body.woocommerce.tax-product_cat
-.woocommerce-products-header__title {
+body.woocommerce.archive .woocommerce-products-header__title {
     position: relative;
-
     display: inline-block;
-
     margin: 0;
     padding-bottom: 18px;
-
     color: var(--eclipse-ink);
-
     font-family: var(--eclipse-font-heading);
     font-size: clamp(32px, 4vw, 44px);
     font-weight: 400;
-
     line-height: 1.2;
 }
 
-
-/* Linha dourada */
-
-body.woocommerce.archive
-.woocommerce-products-header__title::after,
-body.woocommerce.tax-product_cat
-.woocommerce-products-header__title::after {
+body.woocommerce.archive .woocommerce-products-header__title::after {
     content: "";
-
     position: absolute;
-
     left: 50%;
     bottom: 0;
-
     width: 46px;
     height: 1px;
-
     transform: translateX(-50%);
-
     background: var(--eclipse-gold);
 }
 
-
-/* =====================================================
-   BREADCRUMB
-===================================================== */
-
-body.woocommerce.archive
-.woocommerce-breadcrumb,
-body.woocommerce.tax-product_cat
-.woocommerce-breadcrumb {
+/* ---------- Breadcrumb ---------- */
+body.woocommerce.archive .woocommerce-breadcrumb {
     margin: 28px 0 42px;
-
     color: var(--eclipse-muted);
-
     font-family: var(--eclipse-font-body);
     font-size: 11px;
-
     line-height: 1.5;
 }
 
-
-body.woocommerce.archive
-.woocommerce-breadcrumb a,
-body.woocommerce.tax-product_cat
-.woocommerce-breadcrumb a {
+body.woocommerce.archive .woocommerce-breadcrumb a {
     color: var(--eclipse-muted);
     text-decoration: none;
 }
 
-
-body.woocommerce.archive
-.woocommerce-breadcrumb a:hover,
-body.woocommerce.tax-product_cat
-.woocommerce-breadcrumb a:hover {
+body.woocommerce.archive .woocommerce-breadcrumb a:hover {
     color: var(--eclipse-wine);
 }
 
-
-/* =====================================================
-   GRID DE PRODUTOS
-===================================================== */
-
-body.woocommerce.archive ul.products,
-body.woocommerce.tax-product_cat ul.products {
-    display: grid;
-
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-
-    column-gap: 24px;
-    row-gap: 55px;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    list-style: none;
-}
-
-
-/* Remove o comportamento padrão do Storefront */
-
-body.woocommerce.archive ul.products::before,
-body.woocommerce.archive ul.products::after,
-body.woocommerce.tax-product_cat ul.products::before,
-body.woocommerce.tax-product_cat ul.products::after {
-    display: none;
-}
-
-
-/* Cada produto */
-
-body.woocommerce.archive ul.products li.product,
-body.woocommerce.tax-product_cat ul.products li.product {
-    float: none !important;
-
-    width: auto !important;
-
-    margin: 0 !important;
-
-    padding: 0;
-
-    text-align: center;
-
-    background: transparent;
-}
-
-
-/* =====================================================
-   IMAGENS DOS PRODUTOS
-===================================================== */
-
-body.woocommerce.archive
-ul.products li.product a img,
-
-body.woocommerce.tax-product_cat
-ul.products li.product a img {
-    display: block;
-
-    width: 100% !important;
-    height: auto !important;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-
-    margin: 0 0 18px !important;
-
-    background: #ffffff;
-
-    border: 0;
-
-    transition:
-        transform 0.4s ease,
-        opacity 0.4s ease;
-}
-
-body.woocommerce.archive
-ul.products li.product:hover a img,
-
-body.woocommerce.tax-product_cat
-ul.products li.product:hover a img {
-    transform: scale(1.02);
-
-    opacity: 0.94;
-}
-
-/* =====================================================
-   NOME DOS PRODUTOS
-===================================================== */
-
-body.woocommerce.archive
-ul.products li.product
-.woocommerce-loop-product__title,
-
-body.woocommerce.tax-product_cat
-ul.products li.product
-.woocommerce-loop-product__title {
-    margin: 0 5px 8px !important;
-
-    min-height: 38px;
-
-    color: var(--eclipse-ink);
-
-    font-family: var(--eclipse-font-heading);
-
-    font-size: 14px !important;
-    font-weight: 400;
-
-    line-height: 1.35;
-
-    transition: color 0.25s ease;
-}
-
-
-body.woocommerce.archive
-ul.products li.product:hover
-.woocommerce-loop-product__title,
-
-body.woocommerce.tax-product_cat
-ul.products li.product:hover
-.woocommerce-loop-product__title {
-    color: var(--eclipse-wine);
-}
-
-/* =====================================================
-   PREÇOS
-===================================================== */
-
-body.woocommerce.archive
-ul.products li.product .price,
-
-body.woocommerce.tax-product_cat
-ul.products li.product .price {
-    display: block;
-
-    margin: 0 0 16px !important;
-
-    color: var(--eclipse-wine) !important;
-
-    font-family: var(--eclipse-font-body);
-
-    font-size: 12px;
-
-    line-height: 1.4;
-}
-
-
-body.woocommerce.archive
-ul.products li.product .price del,
-
-body.woocommerce.tax-product_cat
-ul.products li.product .price del {
-    color: var(--eclipse-muted);
-
-    opacity: 0.65;
-}
-
-
-body.woocommerce.archive
-ul.products li.product .price ins,
-
-body.woocommerce.tax-product_cat
-ul.products li.product .price ins {
-    color: var(--eclipse-wine);
-
-    text-decoration: none;
-}
-
-
-/* =====================================================
-   BOTÃO ADICIONAR AO CARRINHO
-===================================================== */
-
-body.woocommerce.archive
-ul.products li.product .button,
-
-body.woocommerce.tax-product_cat
-ul.products li.product .button {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-
-    margin: 0 !important;
-    padding: 13px 18px;
-
-    border: 1px solid var(--eclipse-wine);
-    border-radius: 0;
-
-    background: transparent;
-    color: var(--eclipse-wine);
-
-    font-family: var(--eclipse-font-body);
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0.8px;
-    text-align: center;
-    text-transform: uppercase;
-
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-
-    text-transform: uppercase;
-
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-
-
-body.woocommerce.archive
-ul.products li.product .button:hover,
-
-body.woocommerce.tax-product_cat
-ul.products li.product .button:hover {
-    background: var(--eclipse-wine);
-
-    border-color: var(--eclipse-wine);
-
-    color: #ffffff;
-}
-
-/* =====================================================
-   SELO DE PROMOÇÃO
-===================================================== */
-
-body.woocommerce.archive
-ul.products li.product span.onsale,
-
-body.woocommerce.tax-product_cat
-ul.products li.product span.onsale {
-    top: 12px !important;
-    left: 12px !important;
-
-    min-width: auto;
-    min-height: auto;
-
-    margin: 0 !important;
-
-    padding: 7px 10px;
-
-    border-radius: 0;
-
-    background: var(--eclipse-wine);
-
-    color: #ffffff;
-
-    font-family: var(--eclipse-font-body);
-
-    font-size: 9px;
-
-    font-weight: 400;
-
-    letter-spacing: 0.4px;
-
-    text-transform: uppercase;
-}
-
-/* =====================================================
-   ORDENAÇÃO
-===================================================== */
-
-body.woocommerce.archive
-.woocommerce-ordering,
-
-body.woocommerce.tax-product_cat
-.woocommerce-ordering {
-    margin-bottom: 35px;
-}
-
-
-body.woocommerce.archive
-.woocommerce-ordering select,
-
-body.woocommerce.tax-product_cat
-.woocommerce-ordering select {
-    min-width: 170px;
-
-    padding: 9px 30px 9px 12px;
-
-    border: 1px solid #d8cec5;
-
-    border-radius: 0;
-
-    background: var(--eclipse-paper);
-
-    color: var(--eclipse-ink);
-
-    font-family: var(--eclipse-font-body);
-
-    font-size: 11px;
-
-    outline: none;
-}
-
-
-body.woocommerce.archive
-.woocommerce-ordering select:focus,
-
-body.woocommerce.tax-product_cat
-.woocommerce-ordering select:focus {
-    border-color: var(--eclipse-gold);
-}
-
-/* Quantidade de produtos */
-
-body.woocommerce.archive
-.woocommerce-result-count,
-
-body.woocommerce.tax-product_cat
-.woocommerce-result-count {
-    margin: 10px 0 35px;
-
-    color: var(--eclipse-muted);
-
-    font-family: var(--eclipse-font-body);
-
-    font-size: 11px;
-}
-
-
-/* =====================================================
-   RESPONSIVIDADE
-===================================================== */
-
-@media (max-width: 900px) {
-
-    body.woocommerce.archive ul.products,
-    body.woocommerce.tax-product_cat ul.products {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-
-        column-gap: 18px;
-        row-gap: 45px;
-    }
-
-}
-
-@media (max-width: 600px) {
-
-    body.woocommerce.archive #content > .col-full,
-    body.woocommerce.tax-product_cat #content > .col-full {
-        width: calc(100% - 32px);
-    }
-
-
-    body.woocommerce.archive ul.products,
-    body.woocommerce.tax-product_cat ul.products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-
-        column-gap: 12px;
-        row-gap: 38px;
-    }
-
-
-    body.woocommerce.archive
-    ul.products li.product
-    .woocommerce-loop-product__title,
-
-    body.woocommerce.tax-product_cat
-    ul.products li.product
-    .woocommerce-loop-product__title {
-        font-size: 12px !important;
-    }
-
-
-    body.woocommerce.archive
-    ul.products li.product .button,
-
-    body.woocommerce.tax-product_cat
-    ul.products li.product .button {
-        padding: 9px 10px;
-
-        font-size: 8px;
-    }
-
-}
-
-
-/* =====================================================
-   ECLIPSE SECRET
-   ORDENAÇÃO + CONTADOR — LARGURA TOTAL
-===================================================== */
-
-body.woocommerce.archive .storefront-sorting,
-body.woocommerce.tax-product_cat .storefront-sorting {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    width: 100% !important;
-    max-width: none !important;
-    box-sizing: border-box;
-    margin: 0 0 38px !important;
-    padding: 0 0 18px !important;
-    border-bottom: 1px solid rgba(174, 145, 99, 0.35);
-}
-
-/* CONTADOR — ESQUERDA */
-body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
-    float: none !important;
-    width: auto;
-    margin: 0 !important;
-    padding: 0;
-    color: var(--eclipse-muted);
-    font-family: var(--eclipse-font-body);
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    line-height: 38px;
-    text-align: left;
-}
-
-/* ORDENAÇÃO — DIREITA */
-body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering {
-    float: none !important;
-    width: auto;
-    margin: 0 !important;
-    padding: 0;
-}
-
-/* SELECT */
-body.woocommerce.archive .storefront-sorting .woocommerce-ordering select,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select {
-    min-width: 185px;
-    height: 38px;
-    padding: 0 34px 0 13px;
-    border: 1px solid #d8cec5;
-    border-radius: 0;
-    background: var(--eclipse-paper);
-    color: var(--eclipse-ink);
-    font-family: var(--eclipse-font-body);
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    outline: none;
-    cursor: pointer;
-    transition:
-        border-color 0.25s ease,
-        background-color 0.25s ease;
-}
-
-body.woocommerce.archive .storefront-sorting .woocommerce-ordering select:hover,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select:hover {
-    border-color: var(--eclipse-gold);
-}
-
-body.woocommerce.archive .storefront-sorting .woocommerce-ordering select:focus,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select:focus {
-    border-color: var(--eclipse-gold);
-    box-shadow: none;
-}
-
-
-/* =====================================================
-   TABLET / CELULAR
-===================================================== */
-
-@media (max-width: 600px) {
-
-    body.woocommerce.archive .storefront-sorting,
-    body.woocommerce.tax-product_cat .storefront-sorting {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14 px;
-    }
-
-    body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
-    body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
-        width: 100%;
-        line-height: 1.5;
-        text-align: left;
-    }
-
-    body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
-    body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering {
-        width: 100%;
-    }
-
-    body.woocommerce.archive .storefront-sorting .woocommerce-ordering select,
-    body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select {
-        width: 100%;
-    }
-}
-
-/* Ajuste final: contador à esquerda, ordenação à direita */
-body.woocommerce.archive .storefront-sorting,
-body.woocommerce.tax-product_cat .storefront-sorting {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    flex-wrap: nowrap !important;
-}
-
-body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
-    order: -1 !important;
-}
-
-body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering {
-    order: 1 !important;
-}
-
-body.woocommerce.archive .storefront-sorting .woocommerce-notices-wrapper,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-notices-wrapper {
-    display: none !important;
-}
-
-/* =====================================================
-   ECLIPSE SECRET — CATEGORIA, PARTE 2 (banner + ajustes)
-===================================================== */
-
-/* ---------- Banner ---------- */
+/* ---------- Banner da categoria ---------- */
 .eclipse-category-banner {
     position: relative;
     isolation: isolate;
     display: flex;
     align-items: center;
-    min-height: 260px;
+    min-height: 200px;
     overflow: hidden;
     background: var(--eclipse-plum);
     color: var(--eclipse-paper);
@@ -2391,24 +1803,23 @@ body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-notices-wrappe
 .eclipse-category-banner__inner {
     width: min(100% - 48px, 1200px);
     margin-inline: auto;
-    padding-block: 48px;
+    padding-block: 36px;
 }
 
-/* Breadcrumb dentro do banner */
-body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb {
-    margin: 0 0 18px;
+body.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb {
+    margin: 0 0 14px;
     padding: 0;
     color: rgba(248, 245, 240, 0.8);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
-body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb a {
+body.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb a {
     color: rgba(248, 245, 240, 0.8);
 }
 
-body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb a:hover {
+body.tax-product_cat .eclipse-category-banner .woocommerce-breadcrumb a:hover {
     color: #fff;
 }
 
@@ -2422,16 +1833,16 @@ body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrum
     margin: 0;
     color: var(--eclipse-paper);
     font-family: var(--eclipse-font-heading);
-    font-size: clamp(34px, 4.5vw, 52px);
+    font-size: clamp(32px, 4vw, 46px);
     font-weight: 400;
     line-height: 1.15;
 }
 
 .eclipse-category-banner__description {
-    max-width: 480px;
-    margin-top: 18px;
+    max-width: 520px;
+    margin-top: 14px;
     color: rgba(248, 245, 240, 0.92);
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.7;
 }
 
@@ -2439,82 +1850,244 @@ body.woocommerce.tax-product_cat .eclipse-category-banner .woocommerce-breadcrum
     margin: 0;
 }
 
-/* Espaço entre banner e listagem; esconde o header vazio do Woo */
-body.tax-product_cat .site-content {
-    padding-top: 40px;
+/* ---------- Contador e ordenação ---------- */
+body.woocommerce.archive .storefront-sorting {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    margin: 0 0 38px !important;
+    padding: 0 0 18px !important;
+    border-bottom: 1px solid rgba(174, 145, 99, 0.35);
 }
 
-body.tax-product_cat .woocommerce-products-header {
-    display: none;
+body.woocommerce.archive .storefront-sorting .woocommerce-notices-wrapper {
+    display: none !important;
 }
 
-/* ---------- Cards alinhados à esquerda ---------- */
-body.woocommerce.archive ul.products li.product,
-body.woocommerce.tax-product_cat ul.products li.product {
-    position: relative;
+body.woocommerce.archive .storefront-sorting .woocommerce-result-count {
+    order: -1 !important;
+    float: none !important;
+    width: auto;
+    margin: 0 !important;
+    padding: 0;
+    color: var(--eclipse-muted);
+    font-family: var(--eclipse-font-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 38px;
     text-align: left;
 }
 
-body.woocommerce.archive ul.products li.product a:not(.button),
-body.woocommerce.tax-product_cat ul.products li.product a:not(.button) {
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering {
+    order: 1 !important;
+    float: none !important;
+    width: auto;
+    margin: 0 !important;
+    padding: 0;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select {
+    min-width: 185px;
+    height: 38px;
+    padding: 0 34px 0 13px;
+    border: 1px solid #d8cec5;
+    border-radius: 0;
+    background: var(--eclipse-paper);
+    color: var(--eclipse-ink);
+    font-family: var(--eclipse-font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select:hover,
+body.woocommerce.archive .storefront-sorting .woocommerce-ordering select:focus {
+    border-color: var(--eclipse-gold);
+    box-shadow: none;
+}
+
+/* ---------- Grade de produtos ---------- */
+body.woocommerce.archive ul.products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 55px;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+}
+
+body.woocommerce.archive ul.products::before,
+body.woocommerce.archive ul.products::after {
+    display: none;
+}
+
+/* ---------- Card ---------- */
+body.woocommerce.archive ul.products li.product {
+    position: relative;
+    float: none !important;
+    display: flex;
+    flex-direction: column;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0;
+    background: transparent;
+    text-align: left;
+}
+
+body.woocommerce.archive ul.products li.product a:not(.button) {
     color: var(--eclipse-ink);
     text-decoration: none;
 }
 
-body.woocommerce.archive ul.products li.product .woocommerce-loop-product__title,
-body.woocommerce.tax-product_cat ul.products li.product .woocommerce-loop-product__title {
-    margin: 0 0 8px !important;
+/* Imagem 4:5 */
+body.woocommerce.archive ul.products li.product a img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+    margin: 0 0 18px !important;
+    border: 0;
+    background: #fff;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+body.woocommerce.archive ul.products li.product:hover a img {
+    transform: scale(1.02);
+    opacity: 0.94;
+}
+
+/* Nome */
+body.woocommerce.archive ul.products li.product .woocommerce-loop-product__title {
+    min-height: 2.8em;
+    margin: 4px 0 6px !important;
     padding: 0;
-    min-height: 2.7em;
     color: var(--eclipse-ink);
     font-family: var(--eclipse-font-body);
-    font-size: 13px !important;
+    font-size: 14px !important;
     font-weight: 500;
-    line-height: 1.35;
+    line-height: 1.4;
+    transition: color 0.25s ease;
 }
 
-body.woocommerce.archive ul.products li.product .price,
-body.woocommerce.tax-product_cat ul.products li.product .price {
+body.woocommerce.archive ul.products li.product:hover .woocommerce-loop-product__title {
+    color: var(--eclipse-wine);
+}
+
+/* Preço */
+body.woocommerce.archive ul.products li.product .price {
+    display: block;
     margin: 0 0 14px !important;
-    font-size: 13px;
+    color: var(--eclipse-wine) !important;
+    font-family: var(--eclipse-font-body);
+    font-size: 16px;
     font-weight: 600;
+    line-height: 1.4;
 }
 
-body.woocommerce.archive ul.products li.product .price del,
-body.woocommerce.tax-product_cat ul.products li.product .price del {
+body.woocommerce.archive ul.products li.product .price del {
     margin-right: 6px;
+    color: var(--eclipse-muted);
+    font-size: 12px;
     font-weight: 400;
-    font-size: 11px;
+    opacity: 0.65;
 }
 
-body.woocommerce.archive ul.products li.product .price ins,
-body.woocommerce.tax-product_cat ul.products li.product .price ins {
+body.woocommerce.archive ul.products li.product .price ins {
     background: transparent;
+    color: var(--eclipse-wine);
     font-weight: 600;
+    text-decoration: none;
 }
 
-/* Selo -10% sobre a imagem */
-body.woocommerce.archive ul.products li.product span.onsale,
-body.woocommerce.tax-product_cat ul.products li.product span.onsale {
+/* Estrelas (só aparecem em produtos com avaliação) */
+body.woocommerce.archive ul.products li.product .star-rating {
+    float: none;
+    margin: 0 0 8px;
+    color: var(--eclipse-gold);
+    font-size: 12px;
+}
+
+/* Botão: alinhado na base do card */
+body.woocommerce.archive ul.products li.product .button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto 0 0 !important;
+    padding: 13px 18px;
+    border: 1px solid var(--eclipse-wine);
+    border-radius: 0;
+    background: transparent;
+    color: var(--eclipse-wine);
+    font-family: var(--eclipse-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.8px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.woocommerce.archive ul.products li.product .button:hover {
+    border-color: var(--eclipse-wine);
+    background: var(--eclipse-wine);
+    color: #fff;
+}
+
+/* Selo de promoção (esquerda) */
+body.woocommerce.archive ul.products li.product span.onsale {
     position: absolute;
     z-index: 2;
+    top: 12px !important;
+    left: 12px !important;
     right: auto;
+    min-width: auto;
+    min-height: auto;
+    margin: 0 !important;
     padding: 6px 9px;
+    border-radius: 0;
+    background: var(--eclipse-wine);
+    color: #fff;
+    font-family: var(--eclipse-font-body);
     font-size: 10px;
     font-weight: 500;
     line-height: 1.2;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
 }
 
-/* ---------- Contador / ordenação ---------- */
-body.woocommerce.archive .storefront-sorting .woocommerce-result-count,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-result-count {
-    font-size: 13px;
-    letter-spacing: 0;
+/* Selos "Novo" e "Mais vendido" (direita), via tags do WooCommerce */
+body.woocommerce.archive ul.products li.product.product_tag-novo::before,
+body.woocommerce.archive ul.products li.product.product_tag-mais-vendido::before {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    padding: 6px 9px;
+    background: var(--eclipse-wine);
+    color: #fff;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
-body.woocommerce.archive .storefront-sorting .woocommerce-ordering select,
-body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering select {
-    font-size: 12px;
+body.woocommerce.archive ul.products li.product.product_tag-novo::before {
+    content: "Novo";
+}
+
+body.woocommerce.archive ul.products li.product.product_tag-mais-vendido::before {
+    content: "Mais vendido";
 }
 
 /* ---------- Paginação ---------- */
@@ -2553,8 +2126,8 @@ body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering selec
 }
 
 .woocommerce-pagination .page-numbers a:hover {
-    color: var(--eclipse-wine);
     background: transparent;
+    color: var(--eclipse-wine);
 }
 
 .woocommerce-pagination .page-numbers span.current {
@@ -2562,24 +2135,332 @@ body.woocommerce.tax-product_cat .storefront-sorting .woocommerce-ordering selec
     color: #fff;
 }
 
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+    body.woocommerce.archive ul.products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 18px;
+        row-gap: 45px;
+    }
+}
+
 /* ---------- Celular ---------- */
 @media (max-width: 600px) {
-    .eclipse-category-banner {
-        min-height: 220px;
+    body.woocommerce.archive #content > .col-full {
+        width: calc(100% - 32px);
     }
 
-    .eclipse-category-banner__inner {
-        width: calc(100% - 32px);
-        padding-block: 36px;
+    body.tax-product_cat .site-content {
+        padding-top: 28px;
+    }
+
+    body.woocommerce.archive ul.products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 12px;
+        row-gap: 38px;
+    }
+
+    body.woocommerce.archive ul.products li.product .woocommerce-loop-product__title {
+        font-size: 12px !important;
+    }
+
+    body.woocommerce.archive ul.products li.product .price {
+        font-size: 14px;
+    }
+
+    body.woocommerce.archive ul.products li.product .button {
+        padding: 10px 8px;
+        font-size: 10px;
+    }
+
+    body.woocommerce.archive .storefront-sorting {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 14px;
+    }
+
+    body.woocommerce.archive .storefront-sorting .woocommerce-result-count {
+        width: 100%;
+        line-height: 1.5;
+    }
+
+    body.woocommerce.archive .storefront-sorting .woocommerce-ordering,
+    body.woocommerce.archive .storefront-sorting .woocommerce-ordering select {
+        width: 100%;
+    }
+
+    .eclipse-category-banner {
+        min-height: 180px;
     }
 
     .eclipse-category-banner::before {
         background: rgba(20, 10, 17, 0.7);
     }
 
-    body.tax-product_cat .site-content {
-        padding-top: 28px;
+    .eclipse-category-banner__inner {
+        width: calc(100% - 32px);
+        padding-block: 28px;
+    }
+
+    .eclipse-category-banner__description {
+        font-size: 15px;
     }
 }
 
+/* =====================================================
+   BARRA DE AVISOS NO TOPO
+===================================================== */
+.eclipse-topbar {
+    padding: 9px 16px;
+    background: var(--eclipse-wine);
+    color: var(--eclipse-paper);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-align: center;
+}
 
+@media (max-width: 600px) {
+    .eclipse-topbar {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+}
+
+/* =====================================================
+   AVISO DE MAIORIDADE (+18)
+===================================================== */
+.eclipse-age {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(20, 10, 17, 0.94);
+}
+
+.eclipse-age.is-open {
+    display: flex;
+}
+
+.eclipse-age__box {
+    width: 100%;
+    max-width: 460px;
+    padding: 44px 32px;
+    background: var(--eclipse-paper);
+    text-align: center;
+}
+
+.eclipse-age__brand {
+    margin: 0 0 24px;
+    color: var(--eclipse-wine);
+    font-family: var(--eclipse-font-heading);
+    font-size: 18px;
+    letter-spacing: 0.2em;
+}
+
+.eclipse-age__box h2 {
+    margin: 0 0 14px;
+    color: var(--eclipse-ink);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.eclipse-age__text {
+    margin: 0 0 28px;
+    color: var(--eclipse-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.eclipse-age__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.eclipse-age__yes {
+    padding: 14px 20px;
+    border: 1px solid var(--eclipse-wine);
+    border-radius: 0;
+    background: var(--eclipse-wine);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.eclipse-age__yes:hover {
+    background: var(--eclipse-plum);
+}
+
+.eclipse-age .eclipse-age__no {
+    color: var(--eclipse-muted);
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* =====================================================
+   RODAPÉ: PAGAMENTO, SEGURANÇA E AJUDA
+===================================================== */
+.eclipse-footer__trust {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(248, 245, 240, 0.15);
+}
+
+#colophon .eclipse-footer__trust h2 {
+    position: relative;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    color: var(--eclipse-paper);
+    font-family: var(--eclipse-font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+#colophon .eclipse-footer__trust h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--eclipse-gold);
+}
+
+.eclipse-footer__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.eclipse-footer__badges li {
+    margin: 0;
+    padding: 7px 12px;
+    border: 1px solid rgba(174, 145, 99, 0.6);
+    color: #c9c0bc;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+}
+
+/* Selo "Site seguro" com cadeado abaixo do texto */
+/* Selos de segurança: ícone abaixo do nome, sem retângulo */
+.eclipse-footer__secure {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.eclipse-footer__secure li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: #c9c0bc;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.eclipse-footer__secure svg {
+    display: block;
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: var(--eclipse-gold);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Ícones das formas de pagamento */
+.eclipse-footer__pay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.eclipse-footer__pay li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 36px;
+    margin: 0;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.eclipse-footer__pay img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+
+.eclipse-footer__links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.eclipse-footer__links li {
+    margin: 0 0 6px;
+}
+
+#colophon .eclipse-footer__links a {
+    display: inline-block;
+    padding-block: 7px;
+    color: #c9c0bc;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#colophon .eclipse-footer__links a:hover {
+    color: var(--eclipse-paper);
+}
+
+@media (max-width: 1023px) {
+    .eclipse-footer__trust {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px;
+    }
+}
+
+@media (max-width: 599px) {
+    .eclipse-footer__trust {
+        grid-template-columns: 1fr;
+        margin-top: 36px;
+        padding-top: 32px;
+    }
+
+    #colophon .eclipse-footer__links a {
+        padding-block: 11px;
+    }
+}

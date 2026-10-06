@@ -304,7 +304,8 @@ add_action('wp', 'eclipse_secret_setup_shop_pages');
 function eclipse_secret_remove_bottom_ordering()
 {
     if (
-        !function_exists('is_shop')|| !function_exists('is_product_category')) {
+        !function_exists('is_shop') || !function_exists('is_product_category')
+    ) {
         return;
     }
 
@@ -327,7 +328,8 @@ add_action('wp', 'eclipse_secret_remove_bottom_ordering', 20);
 function eclipse_secret_remove_bottom_result_count()
 {
     if (
-        !function_exists('is_shop')|| !function_exists('is_product_category')) {
+        !function_exists('is_shop') || !function_exists('is_product_category')
+    ) {
         return;
     }
 
@@ -373,15 +375,15 @@ function eclipse_secret_render_category_banner()
         return;
     }
 
-    $thumb_id    = (int) get_term_meta($term->term_id, 'thumbnail_id', true);
+    $thumb_id = (int) get_term_meta($term->term_id, 'thumbnail_id', true);
     $description = term_description($term->term_id, 'product_cat');
     ?>
     <section class="eclipse-category-banner">
         <?php
         if ($thumb_id) {
             echo wp_get_attachment_image($thumb_id, 'full', false, array(
-                'class'   => 'eclipse-category-banner__image',
-                'alt'     => '',
+                'class' => 'eclipse-category-banner__image',
+                'alt' => '',
                 'loading' => 'eager',
             ));
         }
@@ -389,15 +391,15 @@ function eclipse_secret_render_category_banner()
         <div class="eclipse-category-banner__inner">
             <?php
             woocommerce_breadcrumb(array(
-                'delimiter'   => ' / ',
+                'delimiter' => ' / ',
                 'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
-                'wrap_after'  => '</nav>',
-                'home'        => 'Início',
+                'wrap_after' => '</nav>',
+                'home' => 'Início',
             ));
             ?>
             <h1 class="eclipse-category-banner__title"><?php echo esc_html($term->name); ?></h1>
 
-            <?php if ($description) : ?>
+            <?php if ($description): ?>
                 <div class="eclipse-category-banner__description">
                     <?php echo wp_kses_post($description); ?>
                 </div>
@@ -414,10 +416,10 @@ function eclipse_secret_sale_badge($html, $post, $product)
 {
     if ($product->is_type('variable')) {
         $regular = (float) $product->get_variation_regular_price('min');
-        $sale    = (float) $product->get_variation_sale_price('min');
+        $sale = (float) $product->get_variation_sale_price('min');
     } else {
         $regular = (float) $product->get_regular_price();
-        $sale    = (float) $product->get_sale_price();
+        $sale = (float) $product->get_sale_price();
     }
 
     if ($regular <= 0 || $sale <= 0 || $sale >= $regular) {
@@ -464,4 +466,38 @@ function eclipse_secret_loop_product_title()
 }
 
 
+add_action('storefront_before_header', function () {
+    echo '<div class="eclipse-topbar">Embalagem 100% discreta · Entrega segura para todo o Brasil.</div>';
+});
 
+
+add_action( 'wp_footer', function () {
+    ?>
+    <div class="eclipse-age" id="eclipse-age" role="dialog" aria-modal="true" aria-labelledby="eclipse-age-title">
+        <div class="eclipse-age__box">
+            <p class="eclipse-age__brand">ECLIPSE SECRET</p>
+            <h2 id="eclipse-age-title">Conteúdo para maiores de 18 anos</h2>
+            <p class="eclipse-age__text">Este site contém produtos destinados ao público adulto. Você confirma que tem 18 anos ou mais?</p>
+            <div class="eclipse-age__actions">
+                <button type="button" class="eclipse-age__yes" id="eclipse-age-yes">Sim, tenho 18 anos ou mais</button>
+                <a class="eclipse-age__no" href="https://www.google.com">Não, sair</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function () {
+        var box = document.getElementById('eclipse-age');
+        var ok = false;
+        try { ok = localStorage.getItem('eclipse_age_ok') === '1'; } catch (e) {}
+        if (ok) { return; }
+        box.classList.add('is-open');
+        document.documentElement.style.overflow = 'hidden';
+        document.getElementById('eclipse-age-yes').addEventListener('click', function () {
+            try { localStorage.setItem('eclipse_age_ok', '1'); } catch (e) {}
+            box.classList.remove('is-open');
+            document.documentElement.style.overflow = '';
+        });
+    })();
+    </script>
+    <?php
+} );
