@@ -271,134 +271,6 @@ add_action('wp', 'eclipse_secret_remove_cart_breadcrumb', 20);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-
-
-
-
 /**
  * Remove a barra lateral das páginas de categoria e loja. 04/10
  */
@@ -411,13 +283,6 @@ function eclipse_secret_setup_shop_pages()
     }
 
     if (!is_shop() && !is_product_category()) {
-=======
-/**
- * Ajusta a estrutura da página Minha conta.
- */
-function eclipse_secret_setup_account_page() {
-    if ( ! function_exists( 'is_account_page' ) || ! is_account_page() ) {
->>>>>>> main
         return;
     }
 
@@ -426,9 +291,32 @@ function eclipse_secret_setup_account_page() {
         'storefront_get_sidebar',
         10
     );
-<<<<<<< HEAD
 }
 add_action('wp', 'eclipse_secret_setup_shop_pages');
+
+
+/**
+ * Ajusta a estrutura da página Minha conta.
+ */
+function eclipse_secret_setup_account_page()
+{
+    if (!function_exists('is_account_page') || !is_account_page()) {
+        return;
+    }
+
+    remove_action(
+        'storefront_sidebar',
+        'storefront_get_sidebar',
+        10
+    );
+
+    remove_action(
+        'storefront_before_content',
+        'woocommerce_breadcrumb',
+        10
+    );
+}
+add_action('wp', 'eclipse_secret_setup_account_page', 20);
 
 
 /**
@@ -635,15 +523,6 @@ add_action( 'wp_footer', function () {
     </script>
     <?php
 } );
-=======
-
-    remove_action(
-        'storefront_before_content',
-        'woocommerce_breadcrumb',
-        10
-    );
-}
-add_action( 'wp', 'eclipse_secret_setup_account_page', 20 );
 
 /**
  * Exibe o botão flutuante de atendimento pelo WhatsApp.
@@ -682,4 +561,3 @@ function eclipse_secret_whatsapp_button() {
     <?php
 }
 add_action( 'wp_footer', 'eclipse_secret_whatsapp_button' );
->>>>>>> main
